@@ -8,7 +8,7 @@ const Card = ({display, data, showEmployee}) => {
                 <img className='profile-img' alt='profile-img' src={data.picture} />
     
                 <div className='staff-details'>
-                    <h4>{data.first_name} {data.last_name}</h4>
+                    <h4>{data.first_name} {data.last_name} {data.id}</h4>
                     <h5>{data.city}, {data.country}</h5>
                 </div>
             </div>

@@ -61,28 +61,35 @@ class App extends Component{
     .then(res => {
       this.setState({ allDataArray: res.data });
       this.formatAllStaffArray(res.data);
-      this.formatNewsFeedArray(res.data); 
+      this.formatNewsFeedArray(res.data);
       this.updateDisplay('allStaff')})
       .catch(err => console.log(err))
-    // console.log(body);
   }
 
-  updateEmployee = () => {
+  updateEmployee = (body, id) => {
+    // console.log({body}, {id});
     // put request
+    axios.put(`/api/employees/${id}`, body)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ allDataArray: res.data });
+        this.formatAllStaffArray(res.data);
+        this.formatNewsFeedArray(res.data);
+        this.showEmployee(id);
+      })
+      .catch(err => console.log(err));
+    
   }
 
   deleteEmployee = (id) => {
     // delete request
     axios.delete(`api/employees/${id}`)
-    .then(res => {
-      this.setState({ allDataArray: res.data });
-      this.formatAllStaffArray(res.data);
-      this.formatNewsFeedArray(res.data); 
-      this.updateDisplay('allStaff');
+      .then(res => {
+        this.setState({ allDataArray: res.data });
+        this.formatAllStaffArray(res.data);
+        this.formatNewsFeedArray(res.data);
       })
-      .catch(err => console.log(err))
-
-      // console.log(id);
+      .catch(err => console.log(err));
   }
 
   formatAllStaffArray = (data) => {
@@ -138,6 +145,7 @@ class App extends Component{
 
   editUpdate = () => {
     // put request
+    
   }
 
   deleteUpdate = () => {
@@ -156,7 +164,7 @@ class App extends Component{
         <Header handleClick={this.updateDisplay}/>
         <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
           showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
-          deleteEmployee={this.deleteEmployee}/>
+          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee}/>
       </div>
     )
   }

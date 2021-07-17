@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
+import Form from '../Form/Form';
 
 class Employee extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            input: '',
+            showForm: false,
         }
     }
     
     deleteMe = (id) => {
+        console.log(id);
         this.props.updateDisplay('allStaff');
         this.props.deleteMe(id);
     }
 
+    editMe = () => {
+        // open form and fill it in with information from this employee
+        this.setState({ showForm: true })
+    }
+    
+    closeForm = () => {
+        this.setState({ showForm: false })
+    }
+
     render(){
-        const { info } = this.props;
+        const { info, editEmployee, showEmployee } = this.props;
+        
         const infoUpdates = info.updates.map(update => {
             return (
                 {
@@ -46,7 +58,8 @@ class Employee extends Component{
                             <p>{update.concernLevel}</p>
                             </div>
                 })}
-                <button> EDIT ME </button>
+                <button onClick={this.editMe}> EDIT ME </button>
+                {this.state.showForm && <Form info={info} submitEmployee={editEmployee} close={this.closeForm} showEmployee={showEmployee}/>}
                 <button onClick={() => this.deleteMe(info.id)}> DELETE ME </button>
             </>
         )

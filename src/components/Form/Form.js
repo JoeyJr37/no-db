@@ -21,10 +21,30 @@ class Form extends Component{
         }
     }
 
+    checkForProps = () => {
+        if(this.props.info !== undefined){
+            const { picture, first_name, last_name, birthDate, phone, email, city, country, mentor, position } = this.props.info;
+            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate, phone, email, city, country, mentor, position });
+        } else {
+            console.log('No props right now')
+        }
+    }
+
+    componentDidMount(){
+        this.checkForProps();
+    }
+
     updateState = (e) => {
         const newState = {};
         newState[e.target.name] = e.target.value;
         this.setState(newState);
+    }
+    reset = () => {
+        const inputState = Object.assign({}, this.state);
+        for(const key in inputState){
+            inputState[key] = '';
+        };
+        this.setState(inputState);
     }
 
     submitEmployee = (e) => {
@@ -33,13 +53,15 @@ class Form extends Component{
         const employee = {
             picture, first_name: firstName, last_name: lastName, birthDate, phone, email, city, country, mentor, position
         };
-        employee.updates = [{text: initialUpdate, updatedBy: updatedBy, updatedOn: Date()}];
-        const inputState = Object.assign({}, this.state);
-        for(const key in inputState){
-            inputState[key] = '';
-        };
-        this.setState(inputState);
-        this.props.addEmployee(employee);
+        
+        if (this.props.info !== undefined){
+            const { id } = this.props.info;
+            this.props.submitEmployee(employee, id);
+            this.props.close();
+        } else {
+            employee.updates = [{text: initialUpdate, updatedBy: updatedBy, updatedOn: Date()}];
+            this.props.submitEmployee(employee);
+        }
     }
 
     render(){
