@@ -11,10 +11,13 @@ class Updates extends Component{
     }
 
     render(){
+
+        const { data, display, showEmployee } = this.props;
+
         return(
             <>
-            {this.props.data.map((obj, i) => {
-                return <Card key={i} data={obj} display={this.props.display} showEmployee={this.props.showEmployee}/>
+            {data.map((obj, i) => {
+                return <Card key={i} data={obj} display={display} showEmployee={showEmployee}/>
             })}
             
             </>

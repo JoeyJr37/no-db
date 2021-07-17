@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header'
 import Body from './components/Body/Body'
-import data from './data';
+import axios from 'axios';
 
 class App extends Component{
   constructor(props){
@@ -16,7 +16,7 @@ class App extends Component{
         updates: false,
         showForm: false
       },
-      allDataArray: data,
+      allDataArray: [],
       allStaffArray: [],
       updatesArray: []
     }
@@ -47,8 +47,14 @@ class App extends Component{
   
   componentDidMount(){
     // console.log(this.state.allDataArray.data);
-    this.formatAllStaffArray();
-    this.formatNewsFeedArray();
+    axios.get('/api/employees')
+      .then(res => {
+        this.setState({ allDataArray: res.data });
+        this.formatAllStaffArray(res.data);
+        this.formatNewsFeedArray(res.data); })
+      .catch(err => console.log(err));
+
+    
   }
 
   getAllEmployees = () => {
@@ -67,9 +73,9 @@ class App extends Component{
     // delete request
   }
 
-  formatAllStaffArray = () => {
+  formatAllStaffArray = (data) => {
     // format data for Staff feed
-    const { data } = this.state.allDataArray;
+    
     const allStaffArray = data.map(obj => {
       return {
         id: obj.id, 
@@ -83,9 +89,9 @@ class App extends Component{
     this.setState({ allStaffArray })
   }
 
-  formatNewsFeedArray = () => {
+  formatNewsFeedArray = (data) => {
     // format data for NewsFeed
-    const { data } = this.state.allDataArray;
+    
     const updatesArray = data.map(obj => {
       return {
         id: obj.id,
@@ -136,7 +142,7 @@ class App extends Component{
           <h1> HR Assist </h1>
         </header>
         <Header handleClick={this.updateDisplay}/>
-        <Body display={display} data={this.state.allDataArray.data} allStaff={allStaffArray} newsFeed={updatesArray} 
+        <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
           showEmployee={this.showEmployee}/>
       </div>
     )

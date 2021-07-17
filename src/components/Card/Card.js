@@ -21,6 +21,7 @@ const Card = ({display, data, showEmployee}) => {
                     <div className='update-info'>
                         <img src={data.picture} alt='profile-img' className='update-img' />
                         <h5 className='update-name'>{data.first_name} {data.last_name} </h5>
+                        {/* <span>{update.concernLevel}</span> */}
                     </div>
 
                     <p className='update-text'> {update.text} </p>

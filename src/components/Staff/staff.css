@@ -1,0 +1,11 @@
+.staff-feed {
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.add-staff-btn {
+    padding: 10px;
+    width: 100px;
+}
