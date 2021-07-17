@@ -39,6 +39,7 @@ class Form extends Component{
         newState[e.target.name] = e.target.value;
         this.setState(newState);
     }
+    
     reset = () => {
         const inputState = Object.assign({}, this.state);
         for(const key in inputState){

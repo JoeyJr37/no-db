@@ -13,6 +13,17 @@ addEmployee = (req, res) => {
     res.status(200).send(employees);
 };
 
+addEmployeeUpdate = (req, res) => {
+    const { id } = req.params;
+    const update = req.body;
+    console.log(update);
+    const index = employees.findIndex(e => e.id === +id);
+    employees[index].updates.push(update);
+    // console.log(employees);
+    res.status(200).send(employees);
+};
+
+
 editEmployee = (req, res) => {
     const employee = req.body;
     const { id } = req.params;
@@ -30,4 +41,4 @@ deleteEmployee = (req, res) => {
     res.status(200).send(employees);
 };
 
-module.exports = { getEmployees, addEmployee, editEmployee, deleteEmployee };
+module.exports = { getEmployees, addEmployee, addEmployeeUpdate, editEmployee, deleteEmployee };

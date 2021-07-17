@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Form from '../Form/Form';
+import './employee.css';
+import UpdateForm from '../UpdateForm/UpdateForm';
 
 class Employee extends Component{
     constructor(props){
@@ -7,6 +9,11 @@ class Employee extends Component{
 
         this.state = {
             showForm: false,
+            showUpdateForm: false,
+            text: '',
+            updatedBy: '',
+            updatedOn: '',
+            concernLevel: ''
         }
     }
     
@@ -25,19 +32,27 @@ class Employee extends Component{
         this.setState({ showForm: false })
     }
 
+    showUpdateForm = () => {
+        this.setState({ showUpdateForm: true });
+    }
+
+    addUpdate = (id, body) => {
+        this.props.addUpdate(id, body);
+    }
+
     render(){
         const { info, editEmployee, showEmployee } = this.props;
         
-        const infoUpdates = info.updates.map(update => {
-            return (
-                {
-                    text: 'Does not like chicken',
-                    updatedBy: 'JP',
-                    updatedOn: '07-03-2021',
-                    concernLevel: 'moderate'
-                  }
-            )
-        });
+        // const infoUpdates = info.updates.map(update => {
+        //     return (
+        //         {
+        //             text: 'Does not like chicken',
+        //             updatedBy: 'JP',
+        //             updatedOn: '07-03-2021',
+        //             concernLevel: 'moderate'
+        //           }
+        //     )
+        // });
 
         
 
@@ -51,11 +66,13 @@ class Employee extends Component{
                 <h3> Mentor: {info.mentor} </h3>
                 <h3> Position: {info.position} </h3>
                 <h3> Birth Date: {info.birth_date} </h3>
-                {infoUpdates.map((update, i) => {
+                <button onClick={this.showUpdateForm}> Add Update </button>
+                {this.state.showUpdateForm && <UpdateForm addUpdate={this.addUpdate} id={info.id}/>}
+                {info.updates.map((update, i) => {
                     return <div className='personal-update' key={i}>
                             <p>{update.text}</p>
                             <p>Updated By: {update.updatedBy} On {update.updatedOn}</p>
-                            <p>{update.concernLevel}</p>
+                            <p>Concern level: {update.concernLevel}</p>
                             </div>
                 })}
                 <button onClick={this.editMe}> EDIT ME </button>

@@ -1,20 +1,22 @@
 const express = require('express');
 const app = express();
 const PORT = 5000;
-const { getEmployees, addEmployee, editEmployee, deleteEmployee } = require('./controllers/employeeController');
+const { getEmployees, addEmployee, editEmployee, deleteEmployee,
+    addEmployeeUpdate } = require('./controllers/employeeController');
 
 // MIDDLEWARE
 app.use(express.json());
 
-// ENDPOINTS
+// EMPLOYEE ENDPOINTS
 
-app.get('/api/employees', getEmployees)
+app.get('/api/employees', getEmployees);
+app.post('/api/employees', addEmployee);
+app.put('/api/employees/:id', editEmployee);
+app.delete('/api/employees/:id', deleteEmployee);
 
-app.post('/api/employees', addEmployee)
+// UPDATES ENDPOINTS
 
-app.put('/api/employees/:id', editEmployee )
-
-app.delete('/api/employees/:id', deleteEmployee )
+app.post('/api/employees/:id', addEmployeeUpdate);
 
 
 

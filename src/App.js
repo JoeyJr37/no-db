@@ -117,30 +117,39 @@ class App extends Component{
         picture: obj.picture,
         first_name: obj.first_name,
         last_name: obj.last_name,
-        updates: [ {
-          text: 'Considering applying for a promotion',
-          updatedBy: 'JP',
-          updatedOn: '07-07-2021',
-          concernLevel: 'none'
-        }, {
-          text: 'Recently hired on 07-01-2021',
-          updatedBy: 'JP',
-          updatedOn: '07-01-2021',
-          concernLevel: 'none'
-        }, {
-          text: 'Does not like chicken',
-          updatedBy: 'JP',
-          updatedOn: '07-03-2021',
-          concernLevel: 'moderate'
-        }]
+        updates: obj.updates,
       }
     })
     // add logic here to sort this array by updatedOn property
+    // [ {
+    //   text: 'Considering applying for a promotion',
+    //   updatedBy: 'JP',
+    //   updatedOn: '07-07-2021',
+    //   concernLevel: 'none'
+    // }, {
+    //   text: 'Recently hired on 07-01-2021',
+    //   updatedBy: 'JP',
+    //   updatedOn: '07-01-2021',
+    //   concernLevel: 'none'
+    // }, {
+    //   text: 'Does not like chicken',
+    //   updatedBy: 'JP',
+    //   updatedOn: '07-03-2021',
+    //   concernLevel: 'moderate'
+    // }]
     this.setState({ updatesArray })
   }
 
-  addUpdate = () => {
+  addUpdate = (id, body) => {
     // post request
+    // employee id & update body
+    axios.post(`/api/employees/${id}`, body)
+      .then(res => {
+        this.setState({ allDataArray: res.data });
+        this.formatAllStaffArray(res.data);
+        this.formatNewsFeedArray(res.data);
+      })
+      .catch(err => console.log(err));
   }
 
   editUpdate = () => {
@@ -164,7 +173,7 @@ class App extends Component{
         <Header handleClick={this.updateDisplay}/>
         <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
           showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
-          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee}/>
+          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}/>
       </div>
     )
   }

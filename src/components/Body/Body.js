@@ -3,7 +3,8 @@ import Form from '../Form/Form'
 import Employee from '../Employee/Employee'
 import Feed from '../Feed/Feed'
 
-const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, addEmployee, deleteEmployee, editEmployee}) => {
+const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, addEmployee, 
+        deleteEmployee, editEmployee, addUpdate}) => {
 
     let info = [];
 
@@ -18,7 +19,9 @@ const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, a
         {display.showForm && <Form submitEmployee={addEmployee}/>}
         {display.allStaff && <Feed display={display} data={allStaff} showEmployee={showEmployee} showForm={updateDisplay}/>}
         {display.updates && <Feed display={display} data={newsFeed} showEmployee={showEmployee}/>}
-        {display.employee !== -1 && <Employee info={info} deleteMe={deleteEmployee} updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}/>}
+        {display.employee !== -1 && <Employee info={info} deleteMe={deleteEmployee} 
+            updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}
+            addUpdate={addUpdate} />}
         </>
     )
 }
