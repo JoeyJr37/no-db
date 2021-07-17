@@ -1,0 +1,9 @@
+.nav-bar {
+    display: flex;
+    border: 2px solid black;
+    justify-content: space-around;
+}
+
+.nav-bar h2:hover {
+    cursor: pointer;
+}

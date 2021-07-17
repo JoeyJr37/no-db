@@ -1,0 +1,38 @@
+.staff-card {
+    border: 2px solid black;
+    display: flex;
+}
+
+.profile-img {
+    max-width: 100px;
+}
+
+.staff-details {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.updates-card {
+    border: 2px solid black;
+    text-align: left;
+    padding: 10px 5px 10px 50px;
+}
+
+.update-info {
+    display: flex;
+}
+
+.update-name {
+    margin: 0;
+    padding: 10px;
+}
+
+.update-text {
+    font-size: 25px;
+    margin: 0;
+}
+
+.update-img {
+    max-width: 30px;
+    max-height: 30px;
+}
