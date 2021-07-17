@@ -30,7 +30,7 @@ class App extends Component{
       display.employee = -1;
     };
 
-    return { display };
+    return display;
   }
 
   updateDisplay = (val) => {
