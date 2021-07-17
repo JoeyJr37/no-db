@@ -6,7 +6,6 @@ import Feed from '../Feed/Feed'
 const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, addEmployee, deleteEmployee, editEmployee}) => {
 
     let info = [];
-    // console.log(display.employee);
 
     if (display.employee !== -1){
         const index = data.findIndex(e => e.id === display.employee);

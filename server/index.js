@@ -1,44 +1,20 @@
 const express = require('express');
 const app = express();
 const PORT = 5000;
-
-const employees = require('./data');
-
+const { getEmployees, addEmployee, editEmployee, deleteEmployee } = require('./controllers/employeeController');
 
 // MIDDLEWARE
 app.use(express.json());
 
 // ENDPOINTS
 
-app.get('/api/employees', (req, res) => {
-    res.status(200).send(employees);
-})
+app.get('/api/employees', getEmployees)
 
-app.post('/api/employees', (req, res) => {
-    const employee = req.body;
-    const lastEmployeeIndex = employees.length - 1;
-    const id = employees[lastEmployeeIndex].id + 1;
-    employee.id = +id;
-    employees.push(employee);
-    res.status(200).send(employees);
-})
+app.post('/api/employees', addEmployee)
 
-app.put('/api/employees/:id', (req, res) => {
-    const employee = req.body;
-    const { id } = req.params;
-    const index = employees.findIndex(e => e.id === +id);
-    employee.id = +id;
-    employee.updates = [{}];
-    employees[index] = employee;
-    res.status(200).send(employees);
-})
+app.put('/api/employees/:id', editEmployee )
 
-app.delete('/api/employees/:id', (req, res) => {
-    const { id } = req.params;
-    const index = employees.findIndex(e => e.id === +id);
-    employees.splice(index, 1);
-    res.status(200).send(employees);
-})
+app.delete('/api/employees/:id', deleteEmployee )
 
 
 
