@@ -21,6 +21,16 @@ addEmployeeUpdate = (req, res) => {
     res.status(200).send(employees);
 };
 
+editEmployeeUpdate = (req, res) => {
+    const { id } = req.params;
+    const update = req.body;
+    const index = employees.findIndex(e => e.id === +id);
+    const employee = employees[index];
+    const updateIndex = employee.updates.findIndex(u => u.id === update.id);
+    employees[index].updates[updateIndex] = update;
+    res.status(200).send(employees);
+};
+
 
 editEmployee = (req, res) => {
     const employee = req.body;
@@ -39,4 +49,4 @@ deleteEmployee = (req, res) => {
     res.status(200).send(employees);
 };
 
-module.exports = { getEmployees, addEmployee, addEmployeeUpdate, editEmployee, deleteEmployee };
+module.exports = { getEmployees, addEmployee, addEmployeeUpdate, editEmployee, editEmployeeUpdate, deleteEmployee };

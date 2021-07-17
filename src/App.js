@@ -152,9 +152,15 @@ class App extends Component{
       .catch(err => console.log(err));
   }
 
-  editUpdate = () => {
+  editUpdate = (id, body) => {
     // put request
-    
+    axios.put(`/api/employees/updates/${id}`, body)
+    .then(res => {
+      this.setState({ allDataArray: res.data });
+      this.formatAllStaffArray(res.data);
+      this.formatNewsFeedArray(res.data);
+    })
+    .catch(err => console.log(err));
   }
 
   deleteUpdate = () => {
@@ -173,7 +179,8 @@ class App extends Component{
         <Header handleClick={this.updateDisplay}/>
         <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
           showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
-          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}/>
+          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}
+          editUpdate={this.editUpdate}/>
       </div>
     )
   }

@@ -10,10 +10,7 @@ class Employee extends Component{
         this.state = {
             showForm: false,
             showUpdateForm: false,
-            text: '',
-            updatedBy: '',
-            updatedOn: '',
-            concernLevel: ''
+            updateData: {},
         }
     }
     
@@ -40,22 +37,20 @@ class Employee extends Component{
         this.setState({ showUpdateForm: false });
         this.props.addUpdate(id, body);
     }
+    
+    editUpdate = (update) => {
+        this.setState({ updateData: update});
+        this.showUpdateForm();
+    }
+
+    submitUpdate = (id, body) => {
+        this.setState({ showUpdateForm: false});
+        this.props.editUpdate(id, body);
+    }
 
     render(){
         const { info, editEmployee, showEmployee } = this.props;
-        
-        // const infoUpdates = info.updates.map(update => {
-        //     return (
-        //         {
-        //             text: 'Does not like chicken',
-        //             updatedBy: 'JP',
-        //             updatedOn: '07-03-2021',
-        //             concernLevel: 'moderate'
-        //           }
-        //     )
-        // });
-
-        
+        const { updateData } = this.state;
 
         return(
             <>  
@@ -68,9 +63,9 @@ class Employee extends Component{
                 <h3> Position: {info.position} </h3>
                 <h3> Birth Date: {info.birth_date} </h3>
                 {!this.state.showUpdateForm && <button onClick={this.showUpdateForm}> Add Update </button>}
-                {this.state.showUpdateForm && <UpdateForm addUpdate={this.addUpdate} id={info.id}/>}
+                {this.state.showUpdateForm && <UpdateForm addUpdate={this.addUpdate} editUpdate={this.submitUpdate} id={info.id} info={updateData}/>}
                 {info.updates.map((update, i) => {
-                    return <div className='personal-update' key={i}>
+                    return <div className='personal-update' key={i} onClick={()=>this.editUpdate(update)}>
                             <p>{update.text}</p>
                             <p>Updated By: {update.updatedBy} On {update.updatedOn}</p>
                             <p>Concern level: {update.concernLevel}</p>

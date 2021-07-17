@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 5000;
 const { getEmployees, addEmployee, editEmployee, deleteEmployee,
-    addEmployeeUpdate } = require('./controllers/employeeController');
+    addEmployeeUpdate, editEmployeeUpdate } = require('./controllers/employeeController');
 
 // MIDDLEWARE
 app.use(express.json());
@@ -17,6 +17,7 @@ app.delete('/api/employees/:id', deleteEmployee);
 // UPDATES ENDPOINTS
 
 app.post('/api/employees/:id', addEmployeeUpdate);
+app.put('/api/employees/updates/:id', editEmployeeUpdate);
 
 
 
