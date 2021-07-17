@@ -11,7 +11,6 @@ class Updates extends Component{
     }
 
     render(){
-
         const { data, display, showEmployee } = this.props;
 
         return(

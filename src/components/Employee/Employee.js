@@ -37,6 +37,7 @@ class Employee extends Component{
     }
 
     addUpdate = (id, body) => {
+        this.setState({ showUpdateForm: false });
         this.props.addUpdate(id, body);
     }
 
@@ -66,7 +67,7 @@ class Employee extends Component{
                 <h3> Mentor: {info.mentor} </h3>
                 <h3> Position: {info.position} </h3>
                 <h3> Birth Date: {info.birth_date} </h3>
-                <button onClick={this.showUpdateForm}> Add Update </button>
+                {!this.state.showUpdateForm && <button onClick={this.showUpdateForm}> Add Update </button>}
                 {this.state.showUpdateForm && <UpdateForm addUpdate={this.addUpdate} id={info.id}/>}
                 {info.updates.map((update, i) => {
                     return <div className='personal-update' key={i}>

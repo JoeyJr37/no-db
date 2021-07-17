@@ -1,0 +1,17 @@
+.updates-form {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.updates-form input {
+    margin: 5px 0px;
+}
+
+.updates-form button {
+    width: 100px;
+    align-self: center;
+    padding: 5px 0px;
+    font-size: 20px;
+    margin: 5px 0px;
+}

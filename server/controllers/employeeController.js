@@ -16,10 +16,8 @@ addEmployee = (req, res) => {
 addEmployeeUpdate = (req, res) => {
     const { id } = req.params;
     const update = req.body;
-    console.log(update);
     const index = employees.findIndex(e => e.id === +id);
     employees[index].updates.push(update);
-    // console.log(employees);
     res.status(200).send(employees);
 };
 
