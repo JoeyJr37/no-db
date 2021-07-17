@@ -1,0 +1,16 @@
+.add-new-form {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    text-align: left;
+}
+
+.add-new-form input {
+    margin: 5px 0px;
+    height: 20px;
+}
+
+.add-new-form button {
+    width: 100px;
+}

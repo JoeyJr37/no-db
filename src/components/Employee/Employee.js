@@ -8,6 +8,11 @@ class Employee extends Component{
             input: '',
         }
     }
+    
+    deleteMe = (id) => {
+        this.props.updateDisplay('allStaff');
+        this.props.deleteMe(id);
+    }
 
     render(){
         const { info } = this.props;
@@ -25,7 +30,7 @@ class Employee extends Component{
         
 
         return(
-            <>
+            <>  
                 <h2>{info.first_name} {info.last_name}</h2>
                 <img src={info.picture} alt='profile-img' className='profile-img' />
                 <h3> Location: {info.city}, {info.country} </h3>
@@ -41,6 +46,8 @@ class Employee extends Component{
                             <p>{update.concernLevel}</p>
                             </div>
                 })}
+                <button> EDIT ME </button>
+                <button onClick={() => this.deleteMe(info.id)}> DELETE ME </button>
             </>
         )
     }

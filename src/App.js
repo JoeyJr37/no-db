@@ -53,24 +53,36 @@ class App extends Component{
         this.formatAllStaffArray(res.data);
         this.formatNewsFeedArray(res.data); })
       .catch(err => console.log(err));
-
-    
   }
 
-  getAllEmployees = () => {
-    // get request
-  }
-
-  addEmployee = () => {
+  addEmployee = (body) => {
     // post request
+    axios.post('/api/employees', body)
+    .then(res => {
+      this.setState({ allDataArray: res.data });
+      this.formatAllStaffArray(res.data);
+      this.formatNewsFeedArray(res.data); 
+      this.updateDisplay('allStaff')})
+      .catch(err => console.log(err))
+    // console.log(body);
   }
 
   updateEmployee = () => {
     // put request
   }
 
-  deleteEmployee = () => {
+  deleteEmployee = (id) => {
     // delete request
+    axios.delete(`api/employees/${id}`)
+    .then(res => {
+      this.setState({ allDataArray: res.data });
+      this.formatAllStaffArray(res.data);
+      this.formatNewsFeedArray(res.data); 
+      this.updateDisplay('allStaff');
+      })
+      .catch(err => console.log(err))
+
+      // console.log(id);
   }
 
   formatAllStaffArray = (data) => {
@@ -143,7 +155,8 @@ class App extends Component{
         </header>
         <Header handleClick={this.updateDisplay}/>
         <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
-          showEmployee={this.showEmployee}/>
+          showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
+          deleteEmployee={this.deleteEmployee}/>
       </div>
     )
   }
