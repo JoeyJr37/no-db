@@ -121,22 +121,6 @@ class App extends Component{
       }
     })
     // add logic here to sort this array by updatedOn property
-    // [ {
-    //   text: 'Considering applying for a promotion',
-    //   updatedBy: 'JP',
-    //   updatedOn: '07-07-2021',
-    //   concernLevel: 'none'
-    // }, {
-    //   text: 'Recently hired on 07-01-2021',
-    //   updatedBy: 'JP',
-    //   updatedOn: '07-01-2021',
-    //   concernLevel: 'none'
-    // }, {
-    //   text: 'Does not like chicken',
-    //   updatedBy: 'JP',
-    //   updatedOn: '07-03-2021',
-    //   concernLevel: 'moderate'
-    // }]
     this.setState({ updatesArray })
   }
 
@@ -163,11 +147,19 @@ class App extends Component{
     .catch(err => console.log(err));
   }
 
-  deleteUpdate = () => {
+  deleteUpdate = (employeeId, updateId) => {
     // delete request
+    axios.delete(`/api/employees/updates/${employeeId}/${updateId}`)
+      .then(res => {
+        this.setState({ allDataArray: res.data });
+        this.formatAllStaffArray(res.data);
+        this.formatNewsFeedArray(res.data);
+      })
+      .catch(err => console.log(err));
   }
 
   render(){
+
     const { display, allStaffArray, updatesArray } = this.state;
 
     return (
@@ -180,7 +172,7 @@ class App extends Component{
         <Body display={display} data={this.state.allDataArray} allStaff={allStaffArray} newsFeed={updatesArray} 
           showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
           deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}
-          editUpdate={this.editUpdate}/>
+          editUpdate={this.editUpdate} deleteUpdate={this.deleteUpdate}/>
       </div>
     )
   }

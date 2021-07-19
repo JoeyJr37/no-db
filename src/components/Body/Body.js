@@ -4,7 +4,7 @@ import Employee from '../Employee/Employee'
 import Feed from '../Feed/Feed'
 
 const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, addEmployee, 
-        deleteEmployee, editEmployee, addUpdate, editUpdate}) => {
+        deleteEmployee, editEmployee, addUpdate, editUpdate, deleteUpdate}) => {
 
     let info = [];
 
@@ -21,7 +21,7 @@ const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, a
         {display.updates && <Feed display={display} data={newsFeed} showEmployee={showEmployee}/>}
         {display.employee !== -1 && <Employee info={info} deleteMe={deleteEmployee} 
             updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}
-            addUpdate={addUpdate} editUpdate={editUpdate}/>}
+            addUpdate={addUpdate} editUpdate={editUpdate} deleteUpdate={deleteUpdate}/>}
         </>
     )
 }

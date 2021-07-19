@@ -49,4 +49,12 @@ deleteEmployee = (req, res) => {
     res.status(200).send(employees);
 };
 
-module.exports = { getEmployees, addEmployee, addEmployeeUpdate, editEmployee, editEmployeeUpdate, deleteEmployee };
+deleteEmployeeUpdate = (req, res) => {
+    const { employeeId, updateId } = req.params;
+    const index = employees.findIndex(e => e.id === +employeeId);
+    const updateIndex = employees[index].updates.findIndex(u => u.id === +updateId);
+    employees[index].updates.splice([updateIndex], 1);
+    res.status(200).send(employees);
+}
+
+module.exports = { getEmployees, addEmployee, addEmployeeUpdate, editEmployee, editEmployeeUpdate, deleteEmployee, deleteEmployeeUpdate };

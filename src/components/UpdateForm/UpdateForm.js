@@ -20,17 +20,17 @@ class UpdateForm extends Component{
         this.setState(newState);
     }
 
-    checkForProps = () => {
-        if (this.props.info.text !== undefined){
+    closeForm = () => {
+        this.props.closeForm();
+    }
+
+    componentDidMount(){
+        if (this.props.edit){
             const { id, text, updatedBy, updatedOn, concernLevel } = this.props.info;
             this.setState({ id, text, updatedBy, updatedOn, concernLevel });
         } else {
             console.log('No props right now');
         }
-    }
-
-    componentDidMount(){
-        this.checkForProps();
     }
 
     submitUpdate = (e) => {
@@ -39,7 +39,7 @@ class UpdateForm extends Component{
         const body = { id, text, updatedBy, updatedOn, concernLevel };
 
         if (this.props.info.text !== undefined){
-            console.log(this.state);
+            this.props.editReset();
             this.props.editUpdate(this.props.id, body);
         } else {
             const id = uuidv4();
@@ -53,6 +53,7 @@ class UpdateForm extends Component{
 
         return (
             <form className='updates-form'>
+                <button onClick={this.closeForm}>Close </button>
                 <label>Text: <input name='text' onChange={this.updateState} value={text}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn}/></label>

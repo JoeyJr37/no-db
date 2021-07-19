@@ -1,3 +1,14 @@
-.personal-update {
+.employee {
     border: 2px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.personal-info {
+    padding: 50px;
+}
+
+.updates {
+    padding: 50px;
+    border: 1px solid black;
 }

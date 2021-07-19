@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = 5000;
 const { getEmployees, addEmployee, editEmployee, deleteEmployee,
-    addEmployeeUpdate, editEmployeeUpdate } = require('./controllers/employeeController');
+    addEmployeeUpdate, editEmployeeUpdate, deleteEmployeeUpdate } = require('./controllers/employeeController');
 
 // MIDDLEWARE
 app.use(express.json());
@@ -18,7 +18,7 @@ app.delete('/api/employees/:id', deleteEmployee);
 
 app.post('/api/employees/:id', addEmployeeUpdate);
 app.put('/api/employees/updates/:id', editEmployeeUpdate);
-
+app.delete('/api/employees/updates/:employeeId/:updateId', deleteEmployeeUpdate);
 
 
 // Initialize app and set port to listen
