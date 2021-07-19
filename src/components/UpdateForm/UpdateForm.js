@@ -21,6 +21,7 @@ class UpdateForm extends Component{
     }
 
     closeForm = () => {
+        /* close update form */
         this.props.closeForm();
     }
 
