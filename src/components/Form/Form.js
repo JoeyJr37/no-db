@@ -27,9 +27,7 @@ class Form extends Component{
             const { picture, first_name, last_name, birth_date, phone, email, 
                 city, country, mentor, position, updates } = this.props.info;
             this.setState({ picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, updates });
-        } else {
-            console.log('No props right now')
-        }
+        } 
     }
 
     updateState = (e) => {

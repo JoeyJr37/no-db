@@ -16,7 +16,17 @@ class App extends Component{
         updates: false,
         showForm: false
       },
-      allDataArray: [],
+      dataArray: [],
+      employeeFunctions: {
+        add: this.addEmployee,
+        update: this.updateEmployee,
+        delete: this.deleteEmployee
+      },
+      updateFunctions: {
+        addUpdate: this.addUpdate,
+        editUpdate: this.editUpdate,
+        deleteUpdate: this.deleteUpdate
+      }
     }
   }
 
@@ -47,7 +57,7 @@ class App extends Component{
     // console.log(this.state.allDataArray.data);
     axios.get('/api/employees')
       .then(res => {
-        this.setState({ allDataArray: res.data });
+        this.setState({ dataArray: res.data });
         })
       .catch(err => console.log(err));
   }
@@ -56,7 +66,7 @@ class App extends Component{
     // post request
     axios.post('/api/employees', body)
     .then(res => {
-      this.setState({ allDataArray: res.data });
+      this.setState({ dataArray: res.data });
       this.updateDisplay('allStaff')})
       .catch(err => console.log(err))
   }
@@ -66,7 +76,7 @@ class App extends Component{
     // put request
     axios.put(`/api/employees/${id}`, body)
       .then(res => {
-        this.setState({ allDataArray: res.data });
+        this.setState({ dataArray: res.data });
         this.showEmployee(id);
       })
       .catch(err => console.log(err));
@@ -77,7 +87,7 @@ class App extends Component{
     // delete request
     axios.delete(`api/employees/${id}`)
       .then(res => {
-        this.setState({ allDataArray: res.data });
+        this.setState({ dataArray: res.data });
       })
       .catch(err => console.log(err));
   }
@@ -87,7 +97,7 @@ class App extends Component{
     // employee id & update body
     axios.post(`/api/employees/${id}`, body)
       .then(res => {
-        this.setState({ allDataArray: res.data });
+        this.setState({ dataArray: res.data });
       })
       .catch(err => console.log(err));
   }
@@ -98,7 +108,7 @@ class App extends Component{
     // console.log({id}, {body});
     axios.put(`/api/employees/updates/${id}`, body)
     .then(res => {
-      this.setState({ allDataArray: res.data });
+      this.setState({ dataArray: res.data });
     })
     .catch(err => console.log(err));
   }
@@ -107,14 +117,16 @@ class App extends Component{
     // delete request
     axios.delete(`/api/employees/updates/${employeeId}/${updateId}`)
       .then(res => {
-        this.setState({ allDataArray: res.data });
+        this.setState({ dataArray: res.data });
       })
       .catch(err => console.log(err));
   }
 
   render(){
 
-    const { display } = this.state;
+    const { display, dataArray, employeeFunctions, updateFunctions } = this.state;
+
+
 
     return (
       <div className='App'>
@@ -123,10 +135,8 @@ class App extends Component{
           <h1> HR Assist </h1>
         </header>
         <Header handleClick={this.updateDisplay}/>
-        <Body display={display} data={this.state.allDataArray} 
-          showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
-          deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}
-          editUpdate={this.editUpdate} deleteUpdate={this.deleteUpdate}/>
+        <Body display={display} data={dataArray} showEmployee={this.showEmployee} updateDisplay={this.updateDisplay}  
+          updateFunctions={updateFunctions} employeeFunctions={employeeFunctions}/>
       </div>
     )
   }

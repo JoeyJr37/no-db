@@ -19,8 +19,6 @@ const Updates = ({ data, showEmployee}) => {
                 }
             })
     })
-
-    // console.log(updateArray);
     
     /* Sort update array by date */
     updateArray.sort((a, b) => {
@@ -29,7 +27,6 @@ const Updates = ({ data, showEmployee}) => {
         return bDate - aDate }
         );
         
-    // console.log(updateArray);
 
     return(
         <>

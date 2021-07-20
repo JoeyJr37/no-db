@@ -12,7 +12,8 @@ class Employee extends Component{
             info: {},
             showForm: false,
             showUpdateForm: false,
-            edit: false,
+            editable: false,
+            updatesArray: [],
         }
     }
 
@@ -37,30 +38,29 @@ class Employee extends Component{
     deleteEmployee = (id) => {
         // console.log(id);
         this.props.updateDisplay('allStaff');
-        this.props.deleteEmployee(id);
+        this.props.employeeFunctions.delete(id);
     }
 
     addUpdate = (id, body) => {
         this.toggleUpdateForm();
-        this.props.addUpdate(id, body);
+        this.props.updateFunctions.addUpdate(id, body);
     }
     
     activateEditMode = () => {
-        this.setState({ edit: true });
+        this.setState({ editable: true });
     }
 
     deleteUpdate = (updateId) => {
         const { id } = this.state.info;
-        this.props.deleteUpdate(id, updateId);
+        this.props.updateFunctions.deleteUpdate(id, updateId);
     }
 
     editUpdate = (id, body) => {
-        // this.toggleUpdateForm();
-        this.props.editUpdate(id, body);
+        this.props.updateFunctions.editUpdate(id, body);
     }
 
     editReset = () => {
-        this.setState({ edit: false});
+        this.setState({ editable: false});
     }
 
     grabInfo = () => {
@@ -69,33 +69,48 @@ class Employee extends Component{
         const info = data[index];
         return info;
     }
+
+    formatUpdateInfo = () => {
+        const { info } = this.state;
+        const updates = info.updates.slice();
+
+        updates.sort((a, b) => {
+            const aDate = new Date(a.updatedOn);
+            const bDate = new Date(b.updatedOn);
+            return bDate - aDate }
+        );
+
+        return updates;
+    }
     
     componentDidMount(){
         const info = this.grabInfo();
         this.setState({ info });
     }
 
-    componentDidUpdate(prevProps){
-        if (prevProps.data !== this.props.data){
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.info !== this.state.info){
             const info = this.grabInfo();
-            this.setState({ info });
+            const updatesArray = this.formatUpdateInfo();
+            this.setState({ info, updatesArray });
         }
     }
 
     render(){
-
-        const { editEmployee, showEmployee } = this.props;
-        const { info, edit } = this.state;
+        const { showEmployee } = this.props;
+        const { update } = this.props.employeeFunctions;
+        const { info, editable, updatesArray } = this.state;
 
         if (info.first_name === undefined){
             return <h2>Loading...</h2>
         }
         
             return(
+
                 <div className='employee'>  
                     <div className='personal-info'>
 
-                    {this.state.showForm && <Form info={info} submitEmployee={editEmployee} 
+                    {this.state.showForm && <Form info={info} submitEmployee={update} 
                         close={this.toggleEmployeeUpdateForm} showEmployee={showEmployee}/>}
 
                     {!this.state.showForm && 
@@ -119,9 +134,9 @@ class Employee extends Component{
                         {this.state.showUpdateForm && 
                                 <UpdateForm addUpdate={this.addUpdate} id={info.id} closeForm={this.toggleUpdateForm}/>}
 
-                        {info.updates.map((update, i) => {
+                        {updatesArray.map((update, i) => {
                             return <Update key={i} update={update} activateEditMode={this.activateEditMode} 
-                                            deleteUpdate={this.deleteUpdate} edit={edit} editReset={this.editReset} 
+                                            deleteUpdate={this.deleteUpdate} edit={editable} editReset={this.editReset} 
                                             closeForm={this.toggleUpdateForm} 
                                             editUpdate={this.editUpdate} id={info.id} />
                         })}

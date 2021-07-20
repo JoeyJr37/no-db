@@ -4,17 +4,21 @@ import Employee from '../Employee/Employee';
 import Staff from '../Staff/Staff';
 import Updates from '../Updates/Updates';
 
-const Body = ({display, data, showEmployee, updateDisplay, addEmployee, 
-        deleteEmployee, editEmployee, addUpdate, editUpdate, deleteUpdate}) => {
+const Body = ({display, data, showEmployee, updateDisplay, updateFunctions, employeeFunctions}) => {
+
+    const sharedProps = { data, showEmployee };
 
     return(
         <>
-        {display.showForm && <Form submitEmployee={addEmployee}/>}
-        {display.allStaff && <Staff data={data} showEmployee={showEmployee} showForm={updateDisplay}/>}
-        {display.updates && <Updates data={data} display={display} showEmployee={showEmployee} />}
-        {display.employee !== -1 && <Employee id={display.employee} data={data} deleteEmployee={deleteEmployee} 
-            updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}
-            addUpdate={addUpdate} editUpdate={editUpdate} deleteUpdate={deleteUpdate}/>}
+        {display.showForm && <Form submitEmployee={employeeFunctions.add}/>}
+        
+        {display.allStaff && <Staff {...sharedProps} showForm={updateDisplay}/>}
+
+        {display.updates && <Updates {...sharedProps} />}
+
+        {display.employee !== -1 && <Employee {...sharedProps}
+            id={display.employee} employeeFunctions={employeeFunctions} updateFunctions={updateFunctions}
+            updateDisplay={updateDisplay}  />}
         </>
     )
 }
