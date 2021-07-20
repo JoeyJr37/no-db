@@ -5,22 +5,15 @@ import Staff from '../Staff/Staff';
 import Updates from '../Updates/Updates';
 
 
-const Body = ({display, data, newsFeed, showEmployee, updateDisplay, addEmployee, 
+const Body = ({display, data, showEmployee, updateDisplay, addEmployee, 
         deleteEmployee, editEmployee, addUpdate, editUpdate, deleteUpdate}) => {
-
-    let info = [];
-
-    if (display.employee !== -1){
-        const index = data.findIndex(e => e.id === display.employee);
-        info = data[index];
-    }
 
     return(
         <>
         {display.showForm && <Form submitEmployee={addEmployee}/>}
         {display.allStaff && <Staff data={data} showEmployee={showEmployee} showForm={updateDisplay}/>}
-        {display.updates && <Updates data={newsFeed} display={display} showEmployee={showEmployee} />}
-        {display.employee !== -1 && <Employee info={info} deleteMe={deleteEmployee} 
+        {display.updates && <Updates data={data} display={display} showEmployee={showEmployee} />}
+        {display.employee !== -1 && <Employee id={display.employee} data={data} deleteMe={deleteEmployee} 
             updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}
             addUpdate={addUpdate} editUpdate={editUpdate} deleteUpdate={deleteUpdate}/>}
         </>

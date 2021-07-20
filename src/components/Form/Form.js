@@ -15,7 +15,7 @@ class Form extends Component{
             city: '',
             country: '',
             mentor: '',
-            position: '',
+            position: '-1',
             initialUpdate: '',
             updatedBy: '',
             updates: [],
@@ -24,7 +24,8 @@ class Form extends Component{
 
     componentDidMount(){
         if(this.props.info !== undefined){
-            const { picture, first_name, last_name, birthDate, phone, email, city, country, mentor, position, updates } = this.props.info;
+            const { picture, first_name, last_name, birthDate, phone, email, 
+                city, country, mentor, position, updates } = this.props.info;
             this.setState({ picture, firstName: first_name, lastName: last_name, birthDate, phone, email, city, country, mentor, position, updates });
         } else {
             console.log('No props right now')
@@ -47,7 +48,8 @@ class Form extends Component{
 
     submitEmployee = (e) => {
         e.preventDefault();
-        const { picture, firstName, lastName, birthDate, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
+        const { picture, firstName, lastName, birthDate, phone, email, city, 
+            country, mentor, position, initialUpdate, updatedBy } = this.state;
         const employee = {
             picture, first_name: firstName, last_name: lastName, birthDate, phone, email, city, country, mentor, position
         };
@@ -64,7 +66,6 @@ class Form extends Component{
     }
 
     render(){
-        // console.log(this.state);
 
         const { picture, firstName, lastName, birthDate, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
 
@@ -79,11 +80,11 @@ class Form extends Component{
                 <label>City: <input name='city' onChange={this.updateState} value={city}/></label>
                 <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
                 <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
-                {/* <label>Position: <input name='position' onChange={this.updateState} value={position}/></label> */}
                 <label> Position:
                         <select value={position} onChange={this.updateState} name='position'>
-                            <option value="team member">Team Member</option>
-                            <option value="team leader">Team Leader</option>
+                            <option value="Team member">Team Member</option>
+                            <option value='-1' default disabled> Choose one: </option>
+                            <option value="Team leader">Team Leader</option>
                         </select>
                 </label>
                 {this.props.info === undefined &&

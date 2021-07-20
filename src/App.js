@@ -64,11 +64,10 @@ class App extends Component{
   }
 
   updateEmployee = (body, id) => {
-    // console.log({body}, {id});
+    console.log({body}, {id});
     // put request
     axios.put(`/api/employees/${id}`, body)
       .then(res => {
-        console.log(res.data);
         this.setState({ allDataArray: res.data });
         this.showEmployee(id);
       })
@@ -83,22 +82,6 @@ class App extends Component{
         this.setState({ allDataArray: res.data });
       })
       .catch(err => console.log(err));
-  }
-
-  formatNewsFeedArray = (data) => {
-    // format data for NewsFeed
-    
-    const updatesArray = data.map(obj => {
-      return {
-        id: obj.id,
-        picture: obj.picture,
-        first_name: obj.first_name,
-        last_name: obj.last_name,
-        updates: obj.updates,
-      }
-    })
-    // add logic here to sort this array by updatedOn property
-    this.setState({ updatesArray })
   }
 
   addUpdate = (id, body) => {
@@ -131,7 +114,7 @@ class App extends Component{
 
   render(){
 
-    const { display, updatesArray } = this.state;
+    const { display } = this.state;
 
     return (
       <div className='App'>
@@ -140,7 +123,7 @@ class App extends Component{
           <h1> HR Assist </h1>
         </header>
         <Header handleClick={this.updateDisplay}/>
-        <Body display={display} data={this.state.allDataArray} newsFeed={updatesArray} 
+        <Body display={display} data={this.state.allDataArray} 
           showEmployee={this.showEmployee} updateDisplay={this.updateDisplay} addEmployee={this.addEmployee} 
           deleteEmployee={this.deleteEmployee} editEmployee={this.updateEmployee} addUpdate={this.addUpdate}
           editUpdate={this.editUpdate} deleteUpdate={this.deleteUpdate}/>

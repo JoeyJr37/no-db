@@ -18,7 +18,7 @@ class Employee extends Component{
     }
 
     deleteMe = (id) => {
-        console.log(id);
+        // console.log(id);
         this.props.updateDisplay('allStaff');
         this.props.deleteMe(id);
     }
@@ -63,16 +63,32 @@ class Employee extends Component{
         this.setState({ edit: false});
     }
 
+    formatInfo = () => {
+        const { data, id } = this.props;
+        const index = data.findIndex(e => e.id === id);
+        const info = data[index];
+        return info;
+    }
+    componentDidMount(){
+        const info = this.formatInfo();
+        this.setState({ info });
+    }
+
     componentDidUpdate(prevProps){
-        if (prevProps.info !== this.props.info){
-            this.setState({ info: this.props.info });
+        if (prevProps.data !== this.props.data){
+            const info = this.formatInfo();
+            this.setState({ info });
         }
     }
 
     render(){
 
-        const { info, editEmployee, showEmployee } = this.props;
-        const { updateData, edit } = this.state;
+        const { editEmployee, showEmployee } = this.props;
+        const { info, updateData, edit } = this.state;
+
+        if (info.first_name === undefined){
+            return <h2>Loading...</h2>
+        }
         
             return(
                 <div className='employee'>  
