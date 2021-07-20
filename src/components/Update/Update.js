@@ -14,14 +14,11 @@ class Update extends Component{
         }
     }
 
-    checkForProps = () => {
+    componentDidMount(){
         if (this.props.update.text !== undefined){
             const { id, text, updatedBy, updatedOn, concernLevel } = this.props.update;
             this.setState({ id, text, updatedBy, updatedOn, concernLevel });
         }
-    }
-    componentDidMount(){
-        this.checkForProps();
     }
 
     componentDidUpdate(prevProps){

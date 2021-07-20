@@ -24,6 +24,9 @@ const Card = ({display, data, showEmployee}) => {
                         {/* <span>{update.concernLevel}</span> */}
                     </div>
 
+                    <div className={`update ${update.concernLevel === 'low' ? 'low' : ""}
+                        ${update.concernLevel === 'medium' ? 'medium' : ""}
+                        ${update.concernLevel === 'high' ? 'high' : ""}`}> Concern level: {update.concernLevel}</div>
                     <p className='update-text'> {update.text} </p>
                     <h6> Updated By: {update.updatedBy} on {update.updatedOn} </h6>
                 </div>

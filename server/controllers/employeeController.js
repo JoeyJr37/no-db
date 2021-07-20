@@ -37,7 +37,8 @@ editEmployee = (req, res) => {
     const { id } = req.params;
     const index = employees.findIndex(e => e.id === +id);
     employee.id = +id;
-    employee.updates = [{}];
+    // employee.updates = [{}];
+    console.log(employee);
     employees[index] = employee;
     res.status(200).send(employees);
 };

@@ -18,20 +18,17 @@ class Form extends Component{
             position: '',
             initialUpdate: '',
             updatedBy: '',
-        }
-    }
-
-    checkForProps = () => {
-        if(this.props.info !== undefined){
-            const { picture, first_name, last_name, birthDate, phone, email, city, country, mentor, position } = this.props.info;
-            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate, phone, email, city, country, mentor, position });
-        } else {
-            console.log('No props right now')
+            updates: [],
         }
     }
 
     componentDidMount(){
-        this.checkForProps();
+        if(this.props.info !== undefined){
+            const { picture, first_name, last_name, birthDate, phone, email, city, country, mentor, position, updates } = this.props.info;
+            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate, phone, email, city, country, mentor, position, updates });
+        } else {
+            console.log('No props right now')
+        }
     }
 
     updateState = (e) => {
@@ -57,6 +54,7 @@ class Form extends Component{
         
         if (this.props.info !== undefined){
             const { id } = this.props.info;
+            employee.updates = this.props.info.updates;
             this.props.submitEmployee(employee, id);
             this.props.close();
         } else {
@@ -81,9 +79,19 @@ class Form extends Component{
                 <label>City: <input name='city' onChange={this.updateState} value={city}/></label>
                 <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
                 <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
-                <label>Position: <input name='position' onChange={this.updateState} value={position}/></label>
-                <label>Initial update: <input name='initialUpdate' onChange={this.updateState} value={initialUpdate}/></label>
-                <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
+                {/* <label>Position: <input name='position' onChange={this.updateState} value={position}/></label> */}
+                <label> Position:
+                        <select value={position} onChange={this.updateState} name='position'>
+                            <option value="team member">Team Member</option>
+                            <option value="team leader">Team Leader</option>
+                        </select>
+                </label>
+                {this.props.info === undefined &&
+                        <>
+                        <label>Initial update: <input name='initialUpdate' onChange={this.updateState} value={initialUpdate}/></label>
+                        <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
+                        </>
+                }
                 <button onClick={this.submitEmployee}>SUBMIT</button>
             </form>
         )

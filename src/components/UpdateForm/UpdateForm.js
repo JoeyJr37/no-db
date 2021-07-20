@@ -58,7 +58,13 @@ class UpdateForm extends Component{
                 <label>Text: <input name='text' onChange={this.updateState} value={text}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn}/></label>
-                <label>Concern Level: <input name='concernLevel' onChange={this.updateState} value={concernLevel}/></label>
+                <label> Concern Level:
+                        <select value={concernLevel} onChange={this.updateState} name='concernLevel'>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                </label>
                 <button onClick={this.submitUpdate}> Submit </button>
             </form>
         )

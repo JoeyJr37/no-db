@@ -1,7 +1,10 @@
 import React from 'react';
-import Form from '../Form/Form'
-import Employee from '../Employee/Employee'
-import Feed from '../Feed/Feed'
+import Form from '../Form/Form';
+import Employee from '../Employee/Employee';
+import Feed from '../Feed/Feed';
+import Staff from '../Staff/Staff';
+import Updates from '../Updates/Updates';
+
 
 const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, addEmployee, 
         deleteEmployee, editEmployee, addUpdate, editUpdate, deleteUpdate}) => {
@@ -17,8 +20,10 @@ const Body = ({display, data, allStaff, newsFeed, showEmployee, updateDisplay, a
     return(
         <>
         {display.showForm && <Form submitEmployee={addEmployee}/>}
-        {display.allStaff && <Feed display={display} data={allStaff} showEmployee={showEmployee} showForm={updateDisplay}/>}
-        {display.updates && <Feed display={display} data={newsFeed} showEmployee={showEmployee}/>}
+        {/* {display.allStaff && <Feed display={display} data={allStaff} showEmployee={showEmployee} showForm={updateDisplay}/>}
+        {display.updates && <Feed display={display} data={newsFeed} showEmployee={showEmployee}/>} */}
+        {display.allStaff && <Staff data={allStaff} display={display} showEmployee={showEmployee} showForm={updateDisplay}/>}
+        {display.updates && <Updates data={newsFeed} display={display} showEmployee={showEmployee} />}
         {display.employee !== -1 && <Employee info={info} deleteMe={deleteEmployee} 
             updateDisplay={updateDisplay} editEmployee={editEmployee} showEmployee={showEmployee}
             addUpdate={addUpdate} editUpdate={editUpdate} deleteUpdate={deleteUpdate}/>}
