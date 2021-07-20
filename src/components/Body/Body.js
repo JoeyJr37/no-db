@@ -7,16 +7,6 @@ import Updates from '../Updates/Updates';
 const Body = ({display, data, showEmployee, updateDisplay, addEmployee, 
         deleteEmployee, editEmployee, addUpdate, editUpdate, deleteUpdate}) => {
 
-    console.log(data);
-
-    const formatDates = () => {
-        const formattedDates = data.map(obj => {
-            console.log((obj.birth_date))
-        })
-    }
-
-    formatDates();
-
     return(
         <>
         {display.showForm && <Form submitEmployee={addEmployee}/>}

@@ -109,7 +109,7 @@ class Employee extends Component{
                             <h3> Email: {info.email} </h3>
                             <h3> Mentor: {info.mentor} </h3>
                             <h3> Position: {info.position} </h3>
-                            <h3> Birth Date: {info.birthDate} </h3>
+                            <h3> Birth Date: {info.birth_date} </h3>
                         </>}
 
                     </div>

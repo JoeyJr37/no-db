@@ -7,9 +7,9 @@ class Form extends Component{
 
         this.state = {
             picture: '',
-            firstName: '',
-            lastName: '',
-            birthDate: '',
+            first_name: '',
+            last_name: '',
+            birth_date: '',
             phone: '',
             email: '',
             city: '',
@@ -26,7 +26,7 @@ class Form extends Component{
         if(this.props.info !== undefined){
             const { picture, first_name, last_name, birth_date, phone, email, 
                 city, country, mentor, position, updates } = this.props.info;
-            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate: birth_date, phone, email, city, country, mentor, position, updates });
+            this.setState({ picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, updates });
         } else {
             console.log('No props right now')
         }
@@ -48,10 +48,10 @@ class Form extends Component{
 
     submitEmployee = (e) => {
         e.preventDefault();
-        const { picture, firstName, lastName, birthDate, phone, email, city, 
+        const { picture, first_name, last_name, birth_date, phone, email, city, 
             country, mentor, position, initialUpdate, updatedBy } = this.state;
         const employee = {
-            picture, first_name: firstName, last_name: lastName, birthDate, phone, email, city, country, mentor, position
+            picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position
         };
         
         if (this.props.info !== undefined){
@@ -67,14 +67,14 @@ class Form extends Component{
 
     render(){
 
-        const { picture, firstName, lastName, birthDate, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
+        const { picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
 
         return (
             <form className='add-new-form'>
                 <label>Profile image: <input name='picture' onChange={this.updateState} value={picture}/></label>
-                <label>First Name: <input name='firstName' onChange={this.updateState} value={firstName}/></label>
-                <label>Last Name: <input name='lastName' onChange={this.updateState} value={lastName}/></label>
-                <label>Birth Date: <input name='birthDate' onChange={this.updateState} value={birthDate}/></label>
+                <label>First Name: <input name='first_name' onChange={this.updateState} value={first_name}/></label>
+                <label>Last Name: <input name='last_name' onChange={this.updateState} value={last_name}/></label>
+                <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}/></label>
                 <label>Phone Number: <input name='phone' onChange={this.updateState} value={phone}/></label>
                 <label>Email Address: <input name='email' onChange={this.updateState} value={email}/></label>
                 <label>City: <input name='city' onChange={this.updateState} value={city}/></label>

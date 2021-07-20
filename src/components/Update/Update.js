@@ -14,6 +14,7 @@ class Update extends Component{
             concernLevel: '',
             showUpdateForm: false,
             update: {},
+            showEditControls: false,
         }
     }
 
@@ -46,14 +47,23 @@ class Update extends Component{
         this.setState({ showUpdateForm: false });
     }
 
+    toggleEditControls = () => {
+        const { showEditControls } = this.state;
+        if(showEditControls){
+            this.setState({ showEditControls: false });
+        } else {
+            this.setState({ showEditControls: true });
+        }
+    }
+
     render(){
-        const { text, updatedBy, updatedOn, concernLevel, showUpdateForm, update } = this.state;
+        const { text, updatedBy, updatedOn, concernLevel, showUpdateForm, update, showEditControls } = this.state;
         const { edit, editUpdate, id } = this.props;
 
         return (
-            <div className={`update ${concernLevel === 'low' ? 'low' : ""}
+            <div className={`individual-update update ${concernLevel === 'low' ? 'low' : ""}
                 ${concernLevel === 'medium' ? 'medium' : ""}
-                ${concernLevel === 'high' ? 'high' : ""}`}>
+                ${concernLevel === 'high' ? 'high' : ""}`} onClick={this.toggleEditControls}>
 
                     {showUpdateForm && <UpdateForm closeEditForm={this.closeUpdateForm} 
                             edit={edit} info={update} editUpdate={editUpdate} id={id} />}
@@ -61,9 +71,11 @@ class Update extends Component{
                     {!showUpdateForm && <>                             
                             <p>{text}</p>
                             <p>Updated By: {updatedBy} On {updatedOn}</p>
-                            <p>Concern level: {concernLevel}</p>
-                            <button onClick={this.openUpdateForm}>EDIT ME</button>
-                            <button onClick={this.deleteUpdate}>DELETE ME</button> 
+                            <p>Concern level: <span>{concernLevel}</span></p>
+                            {showEditControls && <> 
+                                    <button onClick={this.openUpdateForm}>EDIT ME</button>
+                                    <button onClick={this.deleteUpdate}>DELETE ME</button> 
+                                </>}
                             </>}
             </div>
         )

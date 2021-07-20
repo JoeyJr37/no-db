@@ -1,17 +1,30 @@
 .update {
-    border: 1px solid black;
-    padding: 0px 20px;
     margin: 10px 0px;
 }
 
-.low {
-    border: 2px solid springgreen;
+.individual-update {
+    border: 1px solid black;
+    padding: 5px 10px;
 }
 
-.medium {
-    border: 2px solid yellow;
+.update p span {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
 }
 
-.high {
-    border: 2px solid red;
+.low p span {
+    background-color: springgreen;
+}
+
+.medium p span {
+    background-color: yellow;
+}
+
+.high p span{
+    background-color: red;
 }
