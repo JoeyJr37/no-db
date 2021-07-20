@@ -15,7 +15,6 @@ const Body = ({display, data, newsFeed, showEmployee, updateDisplay, addEmployee
         info = data[index];
     }
 
-
     return(
         <>
         {display.showForm && <Form submitEmployee={addEmployee}/>}

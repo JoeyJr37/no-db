@@ -11,25 +11,27 @@ class Staff extends Component{
         }
     }
 
-    formatData = (data) => {
-        // format data for Staff feed
-        
-        const formattedData = data.map(obj => {
-          return {
-            id: obj.id, 
-            picture: obj.picture, 
-            first_name: obj.first_name, 
-            last_name: obj.last_name, 
-            city: obj.city, 
-            country: obj.country
-          }
-        })
-        this.setState({ formattedData })
-      }
-
       componentDidMount(){
-        const { data } = this.props;
-        this.formatData(data);
+        console.log('I ran!');
+
+        const formattedData = this.props.data.map(obj => {
+            return {
+              id: obj.id, 
+              picture: obj.picture, 
+              first_name: obj.first_name, 
+              last_name: obj.last_name, 
+              city: obj.city, 
+              country: obj.country
+            }
+          })
+ 
+        this.setState({ formattedData });
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps !== this.props){
+            this.setState({ formattedData: this.props.data})
+        }
     }
 
       render(){
