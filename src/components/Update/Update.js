@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './update.css';
+import UpdateForm from '../UpdateForm/UpdateForm';
 
 class Update extends Component{
     constructor(props){
@@ -11,6 +12,8 @@ class Update extends Component{
             updatedBy: '',
             updatedOn: '',
             concernLevel: '',
+            showUpdateForm: false,
+            update: {},
         }
     }
 
@@ -28,29 +31,41 @@ class Update extends Component{
         }
     }
 
-    editUpdate = () => {
+    openUpdateForm = () => {
         const { id, text, updatedBy, updatedOn, concernLevel } = this.state;
         const update = { id, text, updatedBy, updatedOn, concernLevel };
-        this.props.editUpdate(update);
+        this.props.activateEditMode();
+        this.setState({ showUpdateForm: true, update });
     }
 
     deleteUpdate = () => {
         this.props.deleteUpdate(this.state.id);
     }
 
+    closeUpdateForm = () =>{
+        this.setState({ showUpdateForm: false });
+    }
+
     render(){
-        const { text, updatedBy, updatedOn, concernLevel } = this.state;
+        const { text, updatedBy, updatedOn, concernLevel, showUpdateForm, update } = this.state;
+        const { edit, editUpdate, id } = this.props;
 
         return (
             <div className={`update ${concernLevel === 'low' ? 'low' : ""}
                 ${concernLevel === 'medium' ? 'medium' : ""}
                 ${concernLevel === 'high' ? 'high' : ""}`}>
+
+                    {showUpdateForm && <UpdateForm closeEditForm={this.closeUpdateForm} 
+                            edit={edit} info={update} editUpdate={editUpdate} id={id} />}
+
+                    {!showUpdateForm && <>                             
                             <p>{text}</p>
                             <p>Updated By: {updatedBy} On {updatedOn}</p>
                             <p>Concern level: {concernLevel}</p>
-                            <button onClick={this.editUpdate}>EDIT ME</button>
-                            <button onClick={this.deleteUpdate}>DELETE ME</button>
-                            </div>
+                            <button onClick={this.openUpdateForm}>EDIT ME</button>
+                            <button onClick={this.deleteUpdate}>DELETE ME</button> 
+                            </>}
+            </div>
         )
     }
 }

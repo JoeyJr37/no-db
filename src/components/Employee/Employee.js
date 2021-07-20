@@ -9,74 +9,75 @@ class Employee extends Component{
         super(props)
 
         this.state = {
+            info: {},
             showForm: false,
             showUpdateForm: false,
-            updateData: {},
-            info: {},
             edit: false,
         }
     }
 
-    deleteMe = (id) => {
+    toggleEmployeeUpdateForm = () => {
+        const { showForm } = this.state;
+        if (showForm){
+            this.setState({ showForm: false })
+        } else {
+            this.setState({ showForm: true })
+        }
+    }
+
+    toggleUpdateForm = () => {
+        const { showUpdateForm } = this.state;
+        if (showUpdateForm){
+            this.setState({ showUpdateForm: false });
+        } else {
+            this.setState({ showUpdateForm: true });
+        }
+    }
+
+    deleteEmployee = (id) => {
         // console.log(id);
         this.props.updateDisplay('allStaff');
-        this.props.deleteMe(id);
-    }
-
-    editMe = () => {
-        // open form and fill it in with information from this employee
-        this.setState({ showForm: true })
-    }
-    
-    closeForm = () => {
-        this.setState({ showForm: false })
-    }
-
-    closeUpdateForm = () => {
-        this.setState({ showUpdateForm: false });
-    }
-
-    showUpdateForm = () => {
-        this.setState({ showUpdateForm: true });
+        this.props.deleteEmployee(id);
     }
 
     addUpdate = (id, body) => {
-        this.closeUpdateForm();
+        this.toggleUpdateForm();
         this.props.addUpdate(id, body);
     }
     
-    editUpdate = (update) => {
-        this.setState({ updateData: update, edit: true});
-        this.showUpdateForm();
-    }
-
-    submitUpdate = (id, body) => {
-        this.closeUpdateForm();
-        this.props.editUpdate(id, body);
+    activateEditMode = () => {
+        this.setState({ edit: true });
     }
 
     deleteUpdate = (updateId) => {
-        this.props.deleteUpdate(this.props.info.id, updateId);
+        const { id } = this.state.info;
+        this.props.deleteUpdate(id, updateId);
+    }
+
+    editUpdate = (id, body) => {
+        // this.toggleUpdateForm();
+        this.props.editUpdate(id, body);
     }
 
     editReset = () => {
         this.setState({ edit: false});
     }
 
-    formatInfo = () => {
+    grabInfo = () => {
         const { data, id } = this.props;
         const index = data.findIndex(e => e.id === id);
         const info = data[index];
         return info;
     }
+    
     componentDidMount(){
-        const info = this.formatInfo();
+        const info = this.grabInfo();
         this.setState({ info });
     }
 
     componentDidUpdate(prevProps){
         if (prevProps.data !== this.props.data){
-            const info = this.formatInfo();
+            const info = this.grabInfo();
             this.setState({ info });
         }
     }
@@ -84,7 +85,7 @@ class Employee extends Component{
     render(){
 
         const { editEmployee, showEmployee } = this.props;
-        const { info, updateData, edit } = this.state;
+        const { info, edit } = this.state;
 
         if (info.first_name === undefined){
             return <h2>Loading...</h2>
@@ -93,25 +94,36 @@ class Employee extends Component{
             return(
                 <div className='employee'>  
                     <div className='personal-info'>
-                    {this.state.showForm && <Form info={info} submitEmployee={editEmployee} close={this.closeForm} showEmployee={showEmployee}/>}
-                        <button onClick={this.editMe}> EDIT ME </button>
-                        <button onClick={() => this.deleteMe(info.id)}> DELETE ME </button>
-                        <h2>{info.first_name} {info.last_name}</h2>
-                        <img src={info.picture} alt='profile-img' className='profile-img' />
-                        <h3> Location: {info.city}, {info.country} </h3>
-                        <h3> Phone: {info.phone} </h3>
-                        <h3> Email: {info.email} </h3>
-                        <h3> Mentor: {info.mentor} </h3>
-                        <h3> Position: {info.position} </h3>
-                        <h3> Birth Date: {info.birth_date} </h3>
+
+                    {this.state.showForm && <Form info={info} submitEmployee={editEmployee} 
+                        close={this.toggleEmployeeUpdateForm} showEmployee={showEmployee}/>}
+
+                    {!this.state.showForm && 
+                        <>                         
+                            <button onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
+                            <button onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button>
+                            <h2>{info.first_name} {info.last_name}</h2>
+                            <img src={info.picture} alt='profile-img' className='profile-img' />
+                            <h3> Location: {info.city}, {info.country} </h3>
+                            <h3> Phone: {info.phone} </h3>
+                            <h3> Email: {info.email} </h3>
+                            <h3> Mentor: {info.mentor} </h3>
+                            <h3> Position: {info.position} </h3>
+                            <h3> Birth Date: {info.birthDate} </h3>
+                        </>}
+
                     </div>
                     <div className='updates'>
-                        {!this.state.showUpdateForm && <button onClick={this.showUpdateForm}> Add Update </button>}
-                        {this.state.showUpdateForm && <UpdateForm addUpdate={this.addUpdate} 
-                            editUpdate={this.submitUpdate} id={info.id} info={updateData} 
-                            edit={edit} editReset={this.editReset} closeForm={this.closeUpdateForm}/>}
+                        {!this.state.showUpdateForm && <button onClick={this.toggleUpdateForm}> Add Update </button>}
+
+                        {this.state.showUpdateForm && 
+                                <UpdateForm addUpdate={this.addUpdate} id={info.id} closeForm={this.toggleUpdateForm}/>}
+
                         {info.updates.map((update, i) => {
-                            return <Update key={i} update={update} editUpdate={this.editUpdate} deleteUpdate={this.deleteUpdate} />
+                            return <Update key={i} update={update} activateEditMode={this.activateEditMode} 
+                                            deleteUpdate={this.deleteUpdate} edit={edit} editReset={this.editReset} 
+                                            closeForm={this.toggleUpdateForm} 
+                                            editUpdate={this.editUpdate} id={info.id} />
                         })}
                     </div>
                 </div>

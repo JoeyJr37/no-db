@@ -64,7 +64,7 @@ class App extends Component{
   }
 
   updateEmployee = (body, id) => {
-    console.log({body}, {id});
+    // console.log({body}, {id});
     // put request
     axios.put(`/api/employees/${id}`, body)
       .then(res => {
@@ -96,6 +96,8 @@ class App extends Component{
 
   editUpdate = (id, body) => {
     // put request
+    // employee id & update body
+    // console.log({id}, {body});
     axios.put(`/api/employees/updates/${id}`, body)
     .then(res => {
       this.setState({ allDataArray: res.data });

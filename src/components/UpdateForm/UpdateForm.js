@@ -11,7 +11,7 @@ class UpdateForm extends Component{
             text: '',
             updatedBy: '',
             updatedOn: '',
-            concernLevel: ''
+            concernLevel: '-1'
         }
     }
     updateState = (e) => {
@@ -20,18 +20,21 @@ class UpdateForm extends Component{
         this.setState(newState);
     }
 
-    closeForm = () => {
+    closeForm = (e) => {
         /* close update form */
-        this.props.closeForm();
+        e.preventDefault();
+        if (!this.props.edit){
+            this.props.closeForm();
+        } else {
+            this.props.closeEditForm();
+        }
     }
 
     componentDidMount(){
         if (this.props.edit){
             const { id, text, updatedBy, updatedOn, concernLevel } = this.props.info;
             this.setState({ id, text, updatedBy, updatedOn, concernLevel });
-        } else {
-            console.log('No props right now');
-        }
+        } 
     }
 
     submitUpdate = (e) => {
@@ -39,18 +42,19 @@ class UpdateForm extends Component{
         const {id, text, updatedBy, updatedOn, concernLevel} = this.state;
         const body = { id, text, updatedBy, updatedOn, concernLevel };
 
-        if (this.props.info.text !== undefined){
-            this.props.editReset();
-            this.props.editUpdate(this.props.id, body);
-        } else {
+        if (this.props.info === undefined){
             const id = uuidv4();
             body.id = id;
             this.props.addUpdate(this.props.id, body);
+        } else {
+            this.props.editUpdate(this.props.id, body);
+            this.closeForm(e);
         }
     }
 
     render(){
         const { text, updatedBy, updatedOn, concernLevel } = this.state;
+        // console.log(this.state);
 
         return (
             <form className='updates-form'>
@@ -60,6 +64,7 @@ class UpdateForm extends Component{
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn}/></label>
                 <label> Concern Level:
                         <select value={concernLevel} onChange={this.updateState} name='concernLevel'>
+                            <option value='-1' default disabled>Choose one: </option>
                             <option value="low">Low</option>
                             <option value="medium">Medium</option>
                             <option value="high">High</option>

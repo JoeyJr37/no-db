@@ -24,9 +24,9 @@ class Form extends Component{
 
     componentDidMount(){
         if(this.props.info !== undefined){
-            const { picture, first_name, last_name, birthDate, phone, email, 
+            const { picture, first_name, last_name, birth_date, phone, email, 
                 city, country, mentor, position, updates } = this.props.info;
-            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate, phone, email, city, country, mentor, position, updates });
+            this.setState({ picture, firstName: first_name, lastName: last_name, birthDate: birth_date, phone, email, city, country, mentor, position, updates });
         } else {
             console.log('No props right now')
         }
@@ -82,8 +82,8 @@ class Form extends Component{
                 <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
                 <label> Position:
                         <select value={position} onChange={this.updateState} name='position'>
-                            <option value="Team member">Team Member</option>
                             <option value='-1' default disabled> Choose one: </option>
+                            <option value="Team member">Team Member</option>
                             <option value="Team leader">Team Leader</option>
                         </select>
                 </label>
