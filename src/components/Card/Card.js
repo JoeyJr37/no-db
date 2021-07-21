@@ -3,8 +3,6 @@ import './card.css';
 
 const Card = ({data, showEmployee}) => {
 
-    // console.log(data);
-
         return (
 
                 <div className='updates-card' onClick={()=>showEmployee(data.id)}>

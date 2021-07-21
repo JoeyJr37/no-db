@@ -1,8 +1,7 @@
 import React from 'react';
-import Form from '../Form/Form';
 import Employee from '../Employee/Employee';
-import Staff from '../Staff/Staff';
-import Updates from '../Updates/Updates';
+import StaffListContainer from '../StaffList/StaffListContainer';
+import UpdateListContainer from '../UpdateList/UpdateListContainer';
 
 const Body = ({display, data, showEmployee, updateDisplay, updateFunctions, employeeFunctions}) => {
 
@@ -10,11 +9,10 @@ const Body = ({display, data, showEmployee, updateDisplay, updateFunctions, empl
 
     return(
         <>
-        {/* {display.showForm && <Form submitEmployee={employeeFunctions.add} />} */}
         
-        {display.allStaff && <Staff {...sharedProps} submitEmployee={employeeFunctions.add}/>}
+        {display.allStaff && <StaffListContainer {...sharedProps} submitEmployee={employeeFunctions.add}/>}
 
-        {display.updates && <Updates {...sharedProps} />}
+        {display.updates && <UpdateListContainer {...sharedProps} />}
 
         {display.employee !== -1 && <Employee {...sharedProps}
             id={display.employee} employeeFunctions={employeeFunctions} updateFunctions={updateFunctions}
