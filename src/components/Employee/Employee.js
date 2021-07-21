@@ -94,6 +94,11 @@ class Employee extends Component{
             const updatesArray = this.formatUpdateInfo();
             this.setState({ info, updatesArray });
         }
+        if (prevProps !== this.props){
+            const info = this.grabInfo();
+            const updatesArray = this.formatUpdateInfo();
+            this.setState({ info, updatesArray });
+        }
     }
 
     render(){
