@@ -10,9 +10,9 @@ const Body = ({display, data, showEmployee, updateDisplay, updateFunctions, empl
 
     return(
         <>
-        {display.showForm && <Form submitEmployee={employeeFunctions.add}/>}
+        {/* {display.showForm && <Form submitEmployee={employeeFunctions.add} />} */}
         
-        {display.allStaff && <Staff {...sharedProps} showForm={updateDisplay}/>}
+        {display.allStaff && <Staff {...sharedProps} submitEmployee={employeeFunctions.add}/>}
 
         {display.updates && <Updates {...sharedProps} />}
 

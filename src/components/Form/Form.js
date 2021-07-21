@@ -58,8 +58,22 @@ class Form extends Component{
             this.props.submitEmployee(employee, id);
             this.props.close();
         } else {
-            employee.updates = [{text: initialUpdate, updatedBy: updatedBy, updatedOn: Date()}];
+            const date = new Date();
+            const month = date.getMonth();
+            const day = date.getDate();
+            const year = date.getFullYear();
+            const formattedDate = `${month}-${day}-${year}`;
+            employee.updates = [{text: initialUpdate, updatedBy: updatedBy, updatedOn: formattedDate}];
+            this.props.closeModal();
             this.props.submitEmployee(employee);
+        }
+    }
+
+    close = () => {
+        if(this.props.info !== undefined){
+            this.props.close();
+        } else {
+            this.props.closeModal();
         }
     }
 
@@ -68,7 +82,8 @@ class Form extends Component{
         const { picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
 
         return (
-            <form className='add-new-form'>
+            <form className='add-new-form modal-content'>
+                <button onClick={this.close}> Close </button>
                 <label>Profile image: <input name='picture' onChange={this.updateState} value={picture}/></label>
                 <label>First Name: <input name='first_name' onChange={this.updateState} value={first_name}/></label>
                 <label>Last Name: <input name='last_name' onChange={this.updateState} value={last_name}/></label>

@@ -14,7 +14,6 @@ class App extends Component{
         employee: -1,
         allStaff: true,
         updates: false,
-        showForm: false
       },
       dataArray: [],
       employeeFunctions: {
@@ -30,6 +29,7 @@ class App extends Component{
     }
   }
 
+  /** Display Functions */
   reset = () => {
     const display = Object.assign({}, this.state.display);
 
@@ -52,6 +52,8 @@ class App extends Component{
     display.employee = val;
     this.setState({ display })
   }
+
+  /** Lifecycle functions */
   
   componentDidMount(){
     // console.log(this.state.allDataArray.data);
@@ -61,6 +63,8 @@ class App extends Component{
         })
       .catch(err => console.log(err));
   }
+
+  /** Employee Functions */
 
   addEmployee = (body) => {
     // post request
@@ -92,6 +96,7 @@ class App extends Component{
       .catch(err => console.log(err));
   }
 
+  /** Update Functions */
   addUpdate = (id, body) => {
     // post request
     // employee id & update body
@@ -125,8 +130,6 @@ class App extends Component{
   render(){
 
     const { display, dataArray, employeeFunctions, updateFunctions } = this.state;
-
-
 
     return (
       <div className='App'>
