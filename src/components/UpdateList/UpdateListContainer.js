@@ -40,11 +40,56 @@ class UpdateListContainer extends Component{
         this.setState({ updateArray });
     }
 
+    compareConcernLevels = (a, b) => {
+        
+        let x;
+        let y;
+
+        if (a.concernLevel === 'high'){
+            x = 1;
+        } else if (a.concernLevel === 'medium') {
+            x = 2;
+        } else {
+            x = 3;
+        }
+
+        if (b.concernLevel === 'high'){
+            y = 1;
+        } else if (b.concernLevel === 'medium'){
+            y = 2;
+        } else {
+            y = 3;
+        }
+
+        if (x === 1 && y === 2){
+            return 1;
+        } else if (x === 1 && y === 3){
+            return -1;
+        } else if (x === 2 && y === 3){
+            return -1;
+        } else if (x === 3 && y === 1){
+            return -1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    sortByConcernLevel = () => {
+        const { updateArray } = this.state;
+        const updateArrayCopy = updateArray.slice();
+        updateArrayCopy.sort(this.compareConcernLevels);
+        this.setState({ updateArray: updateArrayCopy })
+    }
+
     render(){
         const { updateArray } = this.state;
 
         return (
+            <>
+            <button onClick={this.sortByConcernLevel}> Filter </button>
             <UpdateList updateArray={updateArray} showEmployee={this.props.showEmployee} />
+            </>
         )
     }
 }
