@@ -87,7 +87,8 @@ class Form extends Component{
                 <label>Profile image: <input name='picture' onChange={this.updateState} value={picture}/></label>
                 <label>First Name: <input name='first_name' onChange={this.updateState} value={first_name}/></label>
                 <label>Last Name: <input name='last_name' onChange={this.updateState} value={last_name}/></label>
-                <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}/></label>
+                <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
+                                    type='date' /></label>
                 <label>Phone Number: <input name='phone' onChange={this.updateState} value={phone}/></label>
                 <label>Email Address: <input name='email' onChange={this.updateState} value={email}/></label>
                 <label>City: <input name='city' onChange={this.updateState} value={city}/></label>

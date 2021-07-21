@@ -20,13 +20,14 @@ class Update extends Component{
 
     componentDidMount(){
         if (this.props.update.text !== undefined){
+            // console.log(this.props.update);
             const { id, text, updatedBy, updatedOn, concernLevel } = this.props.update;
             this.setState({ id, text, updatedBy, updatedOn, concernLevel });
-        }
+        } 
     }
 
     componentDidUpdate(prevProps){
-        if(this.props.update.concernLevel !== this.state.concernLevel){
+        if (prevProps !== this.props){
             const { id, text, updatedBy, updatedOn, concernLevel } = this.props.update;
             this.setState({ id, text, updatedBy, updatedOn, concernLevel });
         }

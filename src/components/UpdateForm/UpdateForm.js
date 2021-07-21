@@ -61,7 +61,7 @@ class UpdateForm extends Component{
                 <button onClick={this.closeForm}>Close </button>
                 <label>Text: <input name='text' onChange={this.updateState} value={text}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
-                <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn}/></label>
+                <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn} type='date'/></label>
                 <label> Concern Level:
                         <select value={concernLevel} onChange={this.updateState} name='concernLevel'>
                             <option value='-1' default disabled>Choose one: </option>
