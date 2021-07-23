@@ -6,7 +6,9 @@ class UpdateListContainer extends Component{
         super(props)
 
         this.state = {
+            originalUpdateArray: [],
             updateArray: [],
+            sort: '-1',
         }
     }
 
@@ -37,7 +39,7 @@ class UpdateListContainer extends Component{
             return bDate - aDate }
         );
 
-        this.setState({ updateArray });
+        this.setState({ updateArray, originalUpdateArray: updateArray });
     }
 
     compareConcernLevels = (a, b) => {
@@ -76,18 +78,47 @@ class UpdateListContainer extends Component{
     }
 
     sortByConcernLevel = () => {
-        const { updateArray } = this.state;
-        const updateArrayCopy = updateArray.slice();
+        const { originalUpdateArray } = this.state;
+        const updateArrayCopy = originalUpdateArray.slice();
         updateArrayCopy.sort(this.compareConcernLevels);
-        this.setState({ updateArray: updateArrayCopy })
+        return updateArrayCopy;
+    }
+
+    handleChange = (e) => {
+        this.setState({ sort: e.target.value });
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if (this.state.sort !== prevState.sort){
+            if (this.state.sort === 'ascending'){
+                const updateArray = this.sortByConcernLevel();
+                updateArray.reverse();
+                this.setState({ updateArray });
+            } else if (this.state.sort === 'descending') {
+                const updateArray = this.sortByConcernLevel();
+                this.setState({ updateArray });
+            } else {
+                const { originalUpdateArray } = this.state;
+                const updateArray = originalUpdateArray.slice();
+                this.setState({ updateArray });
+            }
+        } 
     }
 
     render(){
-        const { updateArray } = this.state;
+        const { updateArray, sort } = this.state;
 
         return (
             <>
-            <button onClick={this.sortByConcernLevel}> Filter </button>
+            <label> 
+                        <select value={sort} onChange={this.handleChange} name='sort'>
+                            <option value='-1' default disabled> Sort By Concern Level: </option>
+                            <option value='by-date'>Most Recent</option>
+                            <option value="ascending">Low-to-High</option>
+                            <option value="descending">High-to-Low</option>
+                        </select>
+            </label>
+
             <UpdateList updateArray={updateArray} showEmployee={this.props.showEmployee} />
             </>
         )
