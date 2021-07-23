@@ -10,7 +10,7 @@
 .updates-card {
     border: 2px solid black;
     text-align: left;
-    padding: 10px 5px 10px 50px;
+    padding: 10px 5px 10px 10px;
 }
 
 .update-info {
@@ -32,7 +32,7 @@
     max-height: 30px;
 }
 
-.update span {
+.concern-level span {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
@@ -41,14 +41,7 @@
     font-weight: bold;
 }
 
-/* .low span{
-    background-color: springgreen;
+.update-section {
+    display: flex;
+    border: 2px solid blue;
 }
-
-.medium span{
-    background-color: yellow;
-}
-
-.high span{
-    background-color: red;
-} */

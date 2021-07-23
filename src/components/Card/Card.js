@@ -12,11 +12,15 @@ const Card = ({data, showEmployee}) => {
                         <h5 className='update-name'>{data.first_name} {data.last_name} </h5>
                     </div>
 
-                    <div className={`update ${data.concernLevel === 'low' ? 'low' : ""}
-                        ${data.concernLevel === 'medium' ? 'medium' : ""}
-                        ${data.concernLevel === 'high' ? 'high' : ""}`}> Concern level: <span>{data.concernLevel}</span></div>
-                    <p className='update-text'> {data.text} </p>
-                    <h6> Updated By: {data.updatedBy} on {data.updatedOn} </h6>
+                    <div className='update-section'>
+                        <div className={`concern-level ${data.concernLevel === 'low' ? 'low' : ""}
+                            ${data.concernLevel === 'medium' ? 'medium' : ""}
+                            ${data.concernLevel === 'high' ? 'high' : ""}`}> <span>{data.concernLevel}</span></div>
+                        <div className='update-details'>
+                            <p className='update-text'> {data.text} </p>
+                            <h6> Updated By: {data.updatedBy} on {data.updatedOn} </h6>
+                        </div>
+                    </div>
                 </div>
             
             )

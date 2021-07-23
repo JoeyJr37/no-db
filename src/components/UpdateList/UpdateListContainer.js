@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import UpdateList from './UpdateList'
+import './updates.css';
 
 class UpdateListContainer extends Component{
     constructor(props){
@@ -109,7 +110,7 @@ class UpdateListContainer extends Component{
         const { updateArray, sort } = this.state;
 
         return (
-            <>
+            <section className='updates-section'>
             <label> 
                         <select value={sort} onChange={this.handleChange} name='sort'>
                             <option value='-1' default disabled> Sort By Concern Level: </option>
@@ -120,7 +121,7 @@ class UpdateListContainer extends Component{
             </label>
 
             <UpdateList updateArray={updateArray} showEmployee={this.props.showEmployee} />
-            </>
+            </section>
         )
     }
 }

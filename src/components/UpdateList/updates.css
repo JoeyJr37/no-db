@@ -1,0 +1,7 @@
+.updates-section {
+    border: 2px solid red;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
