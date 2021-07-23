@@ -18,7 +18,7 @@ const Card = ({data, showEmployee}) => {
                             ${data.concernLevel === 'high' ? 'high' : ""}`}> <span>{data.concernLevel}</span></div>
                         <div className='update-details'>
                             <p className='update-text'> {data.text} </p>
-                            <h6> Updated By: {data.updatedBy} on {data.updatedOn} </h6>
+                            <h6 className='update-author'> Updated By: {data.updatedBy} on {data.updatedOn} </h6>
                         </div>
                     </div>
                 </div>

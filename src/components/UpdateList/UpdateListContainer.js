@@ -107,13 +107,15 @@ class UpdateListContainer extends Component{
     }
 
     render(){
+        console.log(this.state);
+        
         const { updateArray, sort } = this.state;
 
         return (
             <section className='updates-section'>
             <label> 
                         <select value={sort} onChange={this.handleChange} name='sort'>
-                            <option value='-1' default disabled> Sort By Concern Level: </option>
+                            <option value='-1' default disabled> Sort: </option>
                             <option value='by-date'>Most Recent</option>
                             <option value="ascending">Low-to-High</option>
                             <option value="descending">High-to-Low</option>

@@ -18,7 +18,9 @@
     font-weight: bold;
     font-size: 12px;
     margin-left: 50px;
-    width: 50px;
+    width: 70px;
+    padding: 5px 0px;
+    text-align: center;
 }
 
 .low span {

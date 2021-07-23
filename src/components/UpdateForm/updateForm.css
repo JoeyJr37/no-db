@@ -2,6 +2,7 @@
     border: 2px solid black;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .updates-form label {
