@@ -4,13 +4,26 @@
     flex-direction: column;
     padding: 30px 20px;
     text-align: left;
+    position: relative;
 }
 
-.add-new-form input {
-    margin: 5px 0px;
-    height: 20px;
+.add-new-form label {
+    margin: 12px 0px;
 }
 
 .add-new-form button {
     width: 100px;
+}
+
+.add-new-form label select {
+    position: absolute;
+    left: 150px;
+    width: 155px;
+    height: 24px;
+}
+
+.add-new-form label input {
+    position: absolute;
+    left: 150px;
+    height: 20px;
 }

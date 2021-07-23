@@ -69,14 +69,21 @@ class Update extends Component{
                     {showUpdateForm && <UpdateForm closeEditForm={this.closeUpdateForm} 
                             edit={edit} info={update} editUpdate={editUpdate} id={id} />}
 
-                    {!showUpdateForm && <>                             
-                            <p>{text}</p>
-                            <p>Updated By: {updatedBy} On {updatedOn}</p>
-                            <p>Concern level: <span>{concernLevel}</span></p>
-                            {showEditControls && <> 
+                    {!showUpdateForm && <>
+                            <div className='update-card'>
+                                <div className='update-details'>
+                                    <div className='update-message'>{text}</div>
+                                    
+                                    <div className='update-footer'>
+                                        <div className='update-author-and-date'>Updated By: {updatedBy} On {updatedOn}</div>
+                                        <span>{concernLevel}</span>
+                                    </div>
+                                </div>
+                            </div>                             
+                            {showEditControls && <div className='button-section'> 
                                     <button onClick={this.openUpdateForm}>EDIT ME</button>
                                     <button onClick={this.deleteUpdate}>DELETE ME</button> 
-                                </>}
+                                </div>}
                             </>}
             </div>
         )

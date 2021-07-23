@@ -58,7 +58,6 @@ class UpdateForm extends Component{
 
         return (
             <form className='updates-form'>
-                <button onClick={this.closeForm}>Close </button>
                 <label>Text: <input name='text' onChange={this.updateState} value={text}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn} type='date'/></label>
@@ -70,7 +69,10 @@ class UpdateForm extends Component{
                             <option value="high">High</option>
                         </select>
                 </label>
-                <button onClick={this.submitUpdate}> Submit </button>
+                <div className='button-section'>
+                    <button onClick={this.submitUpdate}> SUBMIT </button>
+                    <button onClick={this.closeForm}>CLOSE </button>
+                </div>
             </form>
         )
     }

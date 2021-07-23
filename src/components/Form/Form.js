@@ -83,17 +83,9 @@ class Form extends Component{
 
         return (
             <form className='add-new-form modal-content'>
-                <button onClick={this.close}> Close </button>
                 <label>Profile image: <input name='picture' onChange={this.updateState} value={picture}/></label>
                 <label>First Name: <input name='first_name' onChange={this.updateState} value={first_name}/></label>
                 <label>Last Name: <input name='last_name' onChange={this.updateState} value={last_name}/></label>
-                <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
-                                    type='date' /></label>
-                <label>Phone Number: <input name='phone' onChange={this.updateState} value={phone}/></label>
-                <label>Email Address: <input name='email' onChange={this.updateState} value={email}/></label>
-                <label>City: <input name='city' onChange={this.updateState} value={city}/></label>
-                <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
-                <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
                 <label> Position:
                         <select value={position} onChange={this.updateState} name='position'>
                             <option value='-1' default disabled> Choose one: </option>
@@ -101,13 +93,24 @@ class Form extends Component{
                             <option value="Team leader">Team Leader</option>
                         </select>
                 </label>
+                <label>City: <input name='city' onChange={this.updateState} value={city}/></label>
+                <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
+                <label>Phone Number: <input name='phone' onChange={this.updateState} value={phone}/></label>
+                <label>Email Address: <input name='email' onChange={this.updateState} value={email}/></label>
+                <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
+                <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
+                                    type='date' /></label>
                 {this.props.info === undefined &&
                         <>
                         <label>Initial update: <input name='initialUpdate' onChange={this.updateState} value={initialUpdate}/></label>
                         <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                         </>
                 }
-                <button onClick={this.submitEmployee}>SUBMIT</button>
+                <div className='button-section'>
+                    <button onClick={this.submitEmployee}>SUBMIT</button>
+                    <button onClick={this.close}> CLOSE </button>
+                </div>
+
             </form>
         )
     }

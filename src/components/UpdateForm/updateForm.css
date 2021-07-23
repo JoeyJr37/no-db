@@ -4,14 +4,33 @@
     flex-direction: column;
 }
 
-.updates-form input {
-    margin: 5px 0px;
+.updates-form label {
+    margin: 10px;
+}
+
+.updates-form label select {
+    position: absolute;
+    left: 200px;
+    width: 155px;
+    height: 24px;
+}
+
+.updates-form label input {
+    position: absolute;
+    left: 200px;
+    height: 20px;
 }
 
 .updates-form button {
+    padding: 7px;
     width: 100px;
-    align-self: center;
-    padding: 5px 0px;
-    font-size: 20px;
-    margin: 5px 0px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    margin: 10px 10px;
+}
+
+.updates-form button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
 }

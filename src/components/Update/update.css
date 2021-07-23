@@ -4,27 +4,72 @@
 
 .individual-update {
     border: 1px solid black;
-    padding: 5px 10px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px;
+    width: 100%;
 }
 
-.update p span {
+.update span {
     display: inline-block;
     border: 1px solid black;
     border-radius: 10px;
-    padding: 10px;
     color: black;
     font-weight: bold;
     font-size: 12px;
+    margin-left: 50px;
+    width: 50px;
 }
 
-.low p span {
-    background-color: springgreen;
+.low span {
+    background-color: rgb(0, 255, 128);
 }
 
-.medium p span {
-    background-color: yellow;
+.medium span {
+    background-color: rgb(248, 248, 157);
 }
 
-.high p span{
-    background-color: red;
+.high span{
+    background-color: rgb(240, 77, 77);
+}
+
+.update-card {
+    display: flex;
+}
+
+.update-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.update-message {
+    font-size: 20px;
+    text-align: left;
+}
+
+.update-author-and-date {
+    font-size: 14px;
+    color: gray;
+}
+
+.update-footer {
+    display: flex;
+}
+
+.button-section {
+    display: flex;
+}
+.button-section button {
+    padding: 7px;
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    margin: 10px 10px;
+}
+
+.button-section button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
 }

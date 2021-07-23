@@ -120,24 +120,30 @@ class Employee extends Component{
 
                     {!this.state.showForm && 
                         <>                         
-                            <button onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
-                            <button onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button>
-                            <h2>{info.first_name} {info.last_name}</h2>
                             <img src={info.picture} alt='profile-img' className='profile-img' />
-                            <h3> Location: {info.city}, {info.country} </h3>
-                            <h3> Phone: {info.phone} </h3>
-                            <h3> Email: {info.email} </h3>
-                            <h3> Mentor: {info.mentor} </h3>
-                            <h3> Position: {info.position} </h3>
-                            <h3> Birth Date: {info.birth_date} </h3>
+                            <h2>{info.first_name} {info.last_name}</h2>
+                            <h3 className='position'> Position: {info.position} </h3>
+                            <span className='title'>Location </span> <h3> {info.city}, {info.country} </h3>
+                            <span className='title'>Phone</span> <h3>{info.phone} </h3>
+                            <span className='title'>Email</span> <h3>{info.email} </h3>
+                            <span className='title'>Mentor</span> <h3>{info.mentor} </h3>
+                            <span className='title'>Birth Date</span><h3> {info.birth_date} </h3>
+                            <div className='button-section'>
+                                <button className='edit-btn' onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
+                                <button className='delete-btn' onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button>
+                            </div>
                         </>}
 
                     </div>
                     <div className='updates'>
-                        {!this.state.showUpdateForm && <button onClick={this.toggleUpdateForm}> Add Update </button>}
 
                         {this.state.showUpdateForm && 
                                 <UpdateForm addUpdate={this.addUpdate} id={info.id} closeForm={this.toggleUpdateForm}/>}
+                        
+                        <div className='update-header'>
+                            <h4 className='update-list-title'>Updates</h4>
+                            {!this.state.showUpdateForm && <button className='add-update-btn' onClick={this.toggleUpdateForm}> + </button>}
+                        </div>
 
                         {updatesArray.map((update, i) => {
                             return <Update key={i} update={update} activateEditMode={this.activateEditMode} 

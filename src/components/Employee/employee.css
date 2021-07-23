@@ -1,14 +1,90 @@
 .employee {
     border: 2px solid black;
+    padding: 10px 10px;
+    margin: 0px 10px;
     display: flex;
     justify-content: center;
+    background-color: rgb(248, 244, 244);
 }
 
 .personal-info {
-    padding: 50px;
+    text-align: center;
+    width: 400px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+    margin: 0px 10px;
+}
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
 }
 
 .updates {
     padding: 50px;
-    border: 1px solid black;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: relative;
+}
+
+.add-update-btn {
+    font-size: 30px;
+    padding: 0px 10px 20px 10px;
+    height: 35px;
+}
+
+.add-update-btn:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+.profile-img {
+    align-self: center;
+}
+
+.position {
+    background-color: rgb(223, 221, 221);
+    border-radius: 10px;
+    padding: 7px;
+    width: 200px;
+    align-self: center;
+}
+
+.title {
+    font-size: 13px;
+    color:rgb(160, 154, 154);
+    align-self: flex-start;
+    margin-left: 30px;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+.update-list-title {
+    align-self: flex-start;
+}
+
+.personal-info button {
+    padding: 7px;
+    width: 100px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    margin: 10px 10px;
+}
+
+.personal-info button:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
 }
