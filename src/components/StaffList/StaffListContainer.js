@@ -25,7 +25,9 @@ class StaffListContainer extends Component{
     }
 
     handleChange = (e) => {
-        this.setState({ userInput: e.target.value });
+        const userInput = e.target.value;
+        const lowercaseInput = userInput.toLowerCase();
+        this.setState({ userInput: lowercaseInput });
     }
 
     render(){
