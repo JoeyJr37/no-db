@@ -1,7 +1,13 @@
 const employees = require('../data');
+const db = (req) = req.app.get('db');
 
 getEmployees = (req, res) => {
-    res.status(200).send(employees);
+    db(req).get_employees().then(employees => {
+        res.status(200).send(employees);
+    }).catch(err => {
+        console.log(`Error fetching data: ${err}`);
+        res.status(400).send(err);
+    })
 };
 
 addEmployee = (req, res) => {
