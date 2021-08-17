@@ -1,4 +1,5 @@
 const express = require('express');
+const massive = require('massive');
 const app = express();
 const PORT = 5000;
 const { getEmployees, addEmployee, editEmployee, deleteEmployee,
@@ -6,6 +7,19 @@ const { getEmployees, addEmployee, editEmployee, deleteEmployee,
 
 // MIDDLEWARE
 app.use(express.json());
+
+
+massive({
+    connectionString: CONNECTION_STRING,
+    ssl: { rejectUnauthorized: false}
+}).then(db => {
+    app.set('db', db);
+    console.log('DB connection established!');
+}).catch(err => {
+    console.log(`Error connecting DB: ${err}`);
+})
+
+
 
 // EMPLOYEE ENDPOINTS
 

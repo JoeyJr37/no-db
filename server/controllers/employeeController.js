@@ -1,5 +1,5 @@
 const employees = require('../data');
-const db = (req) = req.app.get('db');
+const db = (req) => req.app.get('db');
 
 getEmployees = (req, res) => {
     db(req).get_employees().then(employees => {
@@ -12,39 +12,62 @@ getEmployees = (req, res) => {
 
 addEmployee = (req, res) => {
     const employee = req.body;
-    const lastEmployeeIndex = employees.length - 1;
-    const id = employees[lastEmployeeIndex].id + 1;
-    employee.id = +id;
-    employees.push(employee);
-    res.status(200).send(employees);
+    console.log(employee);
+    const { picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position } = employee;
+    const { updates } = employee;
+    const { text, updatedBy, updatedOn } = updates;
+    db(req).add_employee(first_name, last_name, position, country, city, email, 
+        phone, mentor, birth_date, picture )
+        .then(employeeId => {
+            db(req).add_update(employeeId, text, updatedBy, updatedOn)
+                .then(employees => {
+                    res.status(200).send(employees);
+                }).catch(err => {
+                    console.log(`Error adding update to new employee: ${err}`);
+                })
+        }).catch(err => {
+            console.log(`Error adding new data: ${err}`);
+            res.status(400).send(err);
+        })
 };
 
 addEmployeeUpdate = (req, res) => {
-    const { id } = req.params;
+    const { id: employeeId } = req.params;
     const update = req.body;
-    const index = employees.findIndex(e => e.id === +id);
-    employees[index].updates.push(update);
-    res.status(200).send(employees);
+    const { text, updatedBy, updatedOn, concernLevel } = update;
+    db(req).add_update(employeeId, text, updatedBy, updatedOn, concernLevel)
+        .then(employees => {
+            res.status(200).send(employees);
+        }).catch(err => {
+            console.log(`Error adding update: ${err}`);
+        })
 };
 
 editEmployeeUpdate = (req, res) => {
-    const { id } = req.params;
+    const { id: employeeId } = req.params;
     const update = req.body;
-    const index = employees.findIndex(e => e.id === +id);
-    const employee = employees[index];
-    const updateIndex = employee.updates.findIndex(u => u.id === update.id);
-    employees[index].updates[updateIndex] = update;
-    res.status(200).send(employees);
+    const { id, text, updatedBy, updatedOn, concernLevel } = update;
+    console.log(update);
+    db(req).edit_update(id, text, updatedBy, updatedOn, concernLevel)
+        .then(employees => {
+            res.status(200).send(employees);
+        }).catch(err => {
+            console.log(`Error editting update: ${err}`);
+        })
 };
 
 
 editEmployee = (req, res) => {
     const employee = req.body;
     const { id } = req.params;
-    const index = employees.findIndex(e => e.id === +id);
-    employee.id = +id;
-    employees[index] = employee;
-    res.status(200).send(employees);
+    console.log(employee);
+    const { picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position} = employee;
+    db(req).edit_employee(id, first_name, last_name, position, country, city, email, phone, mentor, birth_date, picture)
+        .then(employees => {
+            res.status(200).send(employess);
+        }).catch(err => {
+            console.log(`Error editting employee: ${err}`);
+        })
 };
 
 deleteEmployee = (req, res) => {
