@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const app = express();
+const path = require('path');
 const { CONNECTION_STRING } = process.env;
 const PORT = process.env.PORT || 5000;
 const { getEmployees, addEmployee, editEmployee, deleteEmployee,
@@ -9,6 +10,7 @@ const { getEmployees, addEmployee, editEmployee, deleteEmployee,
 
 // MIDDLEWARE
 app.use(express.json());
+app.use(express.static(path.join('../build')));
 
 
 massive({
