@@ -10,8 +10,8 @@ class Form extends Component{
             first_name: '',
             last_name: '',
             birth_date: '',
-            phone: '',
-            email: '',
+            phone_number: '',
+            email_address: '',
             city: '',
             country: '',
             mentor: '',
@@ -24,9 +24,10 @@ class Form extends Component{
 
     componentDidMount(){
         if(this.props.info !== undefined){
-            const { picture, first_name, last_name, birth_date, phone, email, 
+            const { picture, first_name, last_name, birth_date, phone_number, email_address, 
                 city, country, mentor, position, updates } = this.props.info;
-            this.setState({ picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, updates });
+            const formattedBirthDate = birth_date.split('T')[0];
+            this.setState({ picture, first_name, last_name, birth_date: formattedBirthDate, phone_number, email_address, city, country, mentor, position, updates });
         } 
     }
 
@@ -46,10 +47,10 @@ class Form extends Component{
 
     submitEmployee = (e) => {
         e.preventDefault();
-        const { picture, first_name, last_name, birth_date, phone, email, city, 
+        const { picture, first_name, last_name, birth_date, phone_number, email_address, city, 
             country, mentor, position, initialUpdate, updatedBy } = this.state;
         const employee = {
-            picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position
+            picture, first_name, last_name, birth_date, phone_number, email_address, city, country, mentor, position
         };
         
         if (this.props.info !== undefined){
@@ -79,7 +80,7 @@ class Form extends Component{
 
     render(){
 
-        const { picture, first_name, last_name, birth_date, phone, email, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
+        const { picture, first_name, last_name, birth_date, phone_number, email_address, city, country, mentor, position, initialUpdate, updatedBy } = this.state;
 
         return (
             <form className='add-new-form modal-content'>
@@ -95,8 +96,8 @@ class Form extends Component{
                 </label>
                 <label>City: <input name='city' onChange={this.updateState} value={city}/></label>
                 <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
-                <label>Phone Number: <input name='phone' onChange={this.updateState} value={phone}/></label>
-                <label>Email Address: <input name='email' onChange={this.updateState} value={email}/></label>
+                <label>Phone Number: <input name='phone_number' onChange={this.updateState} value={phone_number}/></label>
+                <label>Email Address: <input name='email_address' onChange={this.updateState} value={email_address}/></label>
                 <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
                 <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
                                     type='date' /></label>

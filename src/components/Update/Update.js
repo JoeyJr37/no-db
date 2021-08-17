@@ -8,7 +8,7 @@ class Update extends Component{
 
         this.state = {
             id: '',
-            text: '',
+            messageText: '',
             updatedBy: '',
             updatedOn: '',
             concernLevel: '',
@@ -19,17 +19,17 @@ class Update extends Component{
     }
 
     componentDidMount(){
-        if (this.props.update.text !== undefined){
+        if (this.props.update.message_text !== undefined){
             // console.log(this.props.update);
-            const { id, text, updatedBy, updatedOn, concernLevel } = this.props.update;
-            this.setState({ id, text, updatedBy, updatedOn, concernLevel });
+            const { updates_id: id, message_text: messageText, updated_by: updatedBy, updated_on: updatedOn, concern_level: concernLevel } = this.props.update;
+            this.setState({ id, messageText, updatedBy, updatedOn, concernLevel });
         } 
     }
 
     componentDidUpdate(prevProps){
         if (prevProps !== this.props){
-            const { id, text, updatedBy, updatedOn, concernLevel } = this.props.update;
-            this.setState({ id, text, updatedBy, updatedOn, concernLevel });
+            const { updates_id: id, message_text: messageText, updated_by: updatedBy, updated_on: updatedOn, concern_level: concernLevel } = this.props.update;
+            this.setState({ id, messageText, updatedBy, updatedOn, concernLevel });
         }
     }
 
@@ -58,7 +58,7 @@ class Update extends Component{
     }
 
     render(){
-        const { text, updatedBy, updatedOn, concernLevel, showUpdateForm, update, showEditControls } = this.state;
+        const { messageText, updatedBy, updatedOn, concernLevel, showUpdateForm, update, showEditControls } = this.state;
         const { edit, editUpdate, id } = this.props;
 
         return (
@@ -72,7 +72,7 @@ class Update extends Component{
                     {!showUpdateForm && <>
                             <div className='update-card'>
                                 <div className='update-details'>
-                                    <div className='update-message'>{text}</div>
+                                    <div className='update-message'>{messageText}</div>
                                     
                                     <div className='update-footer'>
                                         <div className='update-author-and-date'>Updated By: {updatedBy} On {updatedOn}</div>

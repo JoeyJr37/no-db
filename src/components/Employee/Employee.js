@@ -72,15 +72,21 @@ class Employee extends Component{
 
     formatUpdateInfo = () => {
         const { info } = this.state;
-        const updates = info.updates.slice();
-
-        updates.sort((a, b) => {
-            const aDate = new Date(a.updatedOn);
-            const bDate = new Date(b.updatedOn);
-            return bDate - aDate }
-        );
-
-        return updates;
+        if (info.messages === undefined){
+            return [{
+                text: 'No updates to display'
+            }]
+        } else {
+            const updates = info.messages.slice();
+    
+            updates.sort((a, b) => {
+                const aDate = new Date(a.updated_on);
+                const bDate = new Date(b.updated_on);
+                return bDate - aDate }
+            );
+    
+            return updates;
+        }
     }
     
     componentDidMount(){
@@ -106,6 +112,16 @@ class Employee extends Component{
         const { update } = this.props.employeeFunctions;
         const { info, editable, updatesArray } = this.state;
 
+        const formatBirthDate = () => {
+            const { birth_date: birthDate } = this.state.info;
+            if (birthDate !== undefined ){
+                const birthArray = birthDate.split('T');
+                return birthArray[0];
+            }
+        }
+
+        const formattedBirthDate = formatBirthDate();
+
         if (info.first_name === undefined){
             return <h2>Loading...</h2>
         }
@@ -120,14 +136,14 @@ class Employee extends Component{
 
                     {!this.state.showForm && 
                         <>                         
-                            <img src={info.picture} alt='profile-img' className='profile-img' />
+                            {/* <img src={info.picture} alt='profile-img' className='profile-img' /> */}
                             <h2>{info.first_name} {info.last_name}</h2>
                             <h3 className='position'> Position: {info.position} </h3>
-                            <span className='title'>Location </span> <h3> {info.city}, {info.country} </h3>
-                            <span className='title'>Phone</span> <h3>{info.phone} </h3>
-                            <span className='title'>Email</span> <h3>{info.email} </h3>
+                            <span className='title'>Location </span> <h3> {info.city} {info.country} </h3>
+                            <span className='title'>Phone</span> <h3>{info.phone_number} </h3>
+                            <span className='title'>Email</span> <h3>{info.email_address} </h3>
                             <span className='title'>Mentor</span> <h3>{info.mentor} </h3>
-                            <span className='title'>Birth Date</span><h3> {info.birth_date} </h3>
+                            <span className='title'>Birth Date</span><h3> {formattedBirthDate} </h3>
                             <div className='button-section'>
                                 <button className='edit-btn' onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
                                 <button className='delete-btn' onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button>

@@ -13,7 +13,8 @@ CREATE TABLE staff(
 );
 
 CREATE TABLE updates(
-    id SERIAL PRIMARY KEY,
+    update_id SERIAL PRIMARY KEY,
+    staff_id INT,
     message_text TEXT NOT NULL,
     updated_by VARCHAR(25) NOT NULL,
     updated_on DATE,

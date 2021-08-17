@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const app = express();
-const PORT = 5000;
+const { CONNECTION_STRING } = process.env;
+const PORT = process.env.PORT || 5000;
 const { getEmployees, addEmployee, editEmployee, deleteEmployee,
     addEmployeeUpdate, editEmployeeUpdate, deleteEmployeeUpdate } = require('./controllers/employeeController');
 
@@ -10,7 +12,7 @@ app.use(express.json());
 
 
 massive({
-    connectionString: CONNECTION_STRING,
+    connectionString: process.env.DATABASE_URL || CONNECTION_STRING,
     ssl: { rejectUnauthorized: false}
 }).then(db => {
     app.set('db', db);
@@ -18,7 +20,6 @@ massive({
 }).catch(err => {
     console.log(`Error connecting DB: ${err}`);
 })
-
 
 
 // EMPLOYEE ENDPOINTS

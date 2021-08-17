@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "concurrently": "^6.2.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "massive": "^6.10.0",
     "moment": "^2.29.1",
@@ -18,12 +19,14 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "client-start": "react-scripts start",
+    "client-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cd server && nodemon",
-    "dev": "concurrently \"npm run server\" \"npm run start\""
+    "dev": "concurrently \"npm run server\" \"npm run client-start\"",
+    "start": "cd server && node index.js",
+    "heroku-postbuild": "npm install & npm run client-build"
   },
   "eslintConfig": {
     "extends": [

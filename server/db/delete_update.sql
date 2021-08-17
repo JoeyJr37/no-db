@@ -1,3 +1,6 @@
+DELETE FROM updates
+WHERE staff_id = $1 AND update_id = $2;
+
 SELECT staff.id, staff.first_name, staff.last_name, staff.position,
         staff.country, staff.city, staff.email_address, staff.phone_number, staff.mentor, staff.birth_date
     , json_agg(json_build_object(
