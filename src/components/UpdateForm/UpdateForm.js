@@ -8,7 +8,7 @@ class UpdateForm extends Component{
 
         this.state = {
             id: '',
-            text: '',
+            messageText: '',
             updatedBy: '',
             updatedOn: '',
             concernLevel: '-1'
@@ -32,15 +32,15 @@ class UpdateForm extends Component{
 
     componentDidMount(){
         if (this.props.edit){
-            const { id, text, updatedBy, updatedOn, concernLevel } = this.props.info;
-            this.setState({ id, text, updatedBy, updatedOn, concernLevel });
+            const { id, messageText, updatedBy, updatedOn, concernLevel } = this.props.info;
+            this.setState({ id, messageText, updatedBy, updatedOn, concernLevel });
         } 
     }
 
     submitUpdate = (e) => {
         e.preventDefault();
-        const {id, text, updatedBy, updatedOn, concernLevel} = this.state;
-        const body = { id, text, updatedBy, updatedOn, concernLevel };
+        const {id, messageText, updatedBy, updatedOn, concernLevel} = this.state;
+        const body = { id, messageText, updatedBy, updatedOn, concernLevel };
 
         if (this.props.info === undefined){
             const id = uuidv4();
@@ -53,12 +53,12 @@ class UpdateForm extends Component{
     }
 
     render(){
-        const { text, updatedBy, updatedOn, concernLevel } = this.state;
+        const { messageText, updatedBy, updatedOn, concernLevel } = this.state;
         // console.log(this.state);
 
         return (
             <form className='updates-form'>
-                <label>Text: <input name='text' onChange={this.updateState} value={text}/></label>
+                <label>Text: <input name='messageText' onChange={this.updateState} value={messageText}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn} type='date'/></label>
                 <label> Concern Level:

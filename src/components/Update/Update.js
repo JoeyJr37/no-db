@@ -34,8 +34,8 @@ class Update extends Component{
     }
 
     openUpdateForm = () => {
-        const { id, text, updatedBy, updatedOn, concernLevel } = this.state;
-        const update = { id, text, updatedBy, updatedOn, concernLevel };
+        const { id, messageText, updatedBy, updatedOn, concernLevel } = this.state;
+        const update = { id, messageText, updatedBy, updatedOn, concernLevel };
         this.props.activateEditMode();
         this.setState({ showUpdateForm: true, update });
     }

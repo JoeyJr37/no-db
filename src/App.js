@@ -142,7 +142,7 @@ class App extends Component{
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
-          <h1> HR Assist </h1>
+          <h1> GO Landscape </h1>
         </header>
         <Header handleClick={this.updateDisplay}/>
         <Body display={display} data={dataArray} showEmployee={this.showEmployee} updateDisplay={this.updateDisplay}  
