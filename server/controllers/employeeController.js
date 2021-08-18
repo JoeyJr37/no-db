@@ -27,8 +27,8 @@ addEmployee = (req, res) => {
 addEmployeeUpdate = (req, res) => {
     const { id: employeeId } = req.params;
     const update = req.body;
-    const { text, updatedBy, updatedOn, concernLevel } = update;
-    db(req).add_update([employeeId, text, updatedBy, updatedOn, concernLevel])
+    const { messageText, updatedBy, updatedOn, concernLevel } = update;
+    db(req).add_update([employeeId, messageText, updatedBy, updatedOn, concernLevel])
         .then(employees => {
             res.status(200).send(employees);
         }).catch(err => {
