@@ -142,7 +142,7 @@ class Employee extends Component{
                             <span className='title'>Location </span> <h3> {info.city} {info.country} </h3>
                             <span className='title'>Phone</span> <h3>{info.phone_number} </h3>
                             <span className='title'>Email</span> <h3>{info.email_address} </h3>
-                            <span className='title'>Mentor</span> <h3>{info.mentor} </h3>
+                            <span className='title'>FSP</span> <h3>{info.mentor} </h3>
                             <span className='title'>Birth Date</span><h3> {formattedBirthDate} </h3>
                             <div className='button-section'>
                                 <button className='edit-btn' onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
