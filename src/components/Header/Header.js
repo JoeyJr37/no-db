@@ -5,7 +5,7 @@ const Header = ({handleClick}) => {
     return (
         <nav className='nav-bar'>
             <h2 onClick={()=> handleClick('allStaff')}> Staff </h2>
-            {/* <h2 onClick={()=> handleClick('updates')}> NewsFeed </h2> */}
+            <h2 onClick={()=> handleClick('updates')}> NewsFeed </h2>
         </nav>
     )
 }

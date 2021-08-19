@@ -5,7 +5,7 @@ const app = express();
 const path = require('path');
 const { CONNECTION_STRING } = process.env;
 const PORT = process.env.PORT || 5000;
-const { getEmployees, addEmployee, editEmployee, deleteEmployee,
+const { getUpdates, getEmployees, addEmployee, editEmployee, deleteEmployee,
     addEmployeeUpdate, editEmployeeUpdate, deleteEmployeeUpdate } = require('./controllers/employeeController');
 
 // MIDDLEWARE
@@ -33,6 +33,7 @@ app.delete('/api/employees/:id', deleteEmployee);
 
 // UPDATES ENDPOINTS
 
+app.get('/api/employees/updates', getUpdates);
 app.post('/api/employees/:id', addEmployeeUpdate);
 app.put('/api/employees/updates/:id', editEmployeeUpdate);
 app.delete('/api/employees/updates/:employeeId/:updateId', deleteEmployeeUpdate);

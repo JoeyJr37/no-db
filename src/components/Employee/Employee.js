@@ -112,6 +112,12 @@ class Employee extends Component{
         const { update } = this.props.employeeFunctions;
         const { info, editable, updatesArray } = this.state;
 
+        if (info === undefined){
+            console.log(this.state);
+            console.log(this.props);
+            return <h2>Loading...</h2>
+        }
+
         const formatBirthDate = () => {
             const { birth_date: birthDate } = this.state.info;
             if (birthDate !== undefined ){
@@ -122,9 +128,6 @@ class Employee extends Component{
 
         const formattedBirthDate = formatBirthDate();
 
-        if (info.first_name === undefined){
-            return <h2>Loading...</h2>
-        }
         
             return(
 

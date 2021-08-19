@@ -5,10 +5,18 @@ getEmployees = (req, res) => {
     db(req).get_employees().then(employees => {
         res.status(200).send(employees);
     }).catch(err => {
-        console.log(`Error fetching data: ${err}`);
+        console.log(`Error fetching employees: ${err}`);
         res.status(400).send(err);
     })
 };
+
+getUpdates = (req, res) => {
+    db(req).get_updates().then(updates => {
+        res.status(200).send(updates);
+    }).catch(err => {
+        console.log(`Error fetching updates: ${err}`);
+    })
+}
 
 addEmployee = (req, res) => {
     const employee = req.body; 
@@ -81,7 +89,7 @@ deleteEmployeeUpdate = (req, res) => {
         })
 }
 
-module.exports = { getEmployees, 
+module.exports = { getEmployees, getUpdates, 
     addEmployee, addEmployeeUpdate, 
     editEmployee, editEmployeeUpdate, 
     deleteEmployee, deleteEmployeeUpdate };
