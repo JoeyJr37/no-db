@@ -101,12 +101,12 @@ class Form extends Component{
                 <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
                 <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
                                     type='date' /></label>
-                {this.props.info === undefined &&
+                {/* {this.props.info === undefined &&
                         <>
                         <label>Initial update: <input name='initialUpdate' onChange={this.updateState} value={initialUpdate}/></label>
                         <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                         </>
-                }
+                } */}
                 <div className='button-section'>
                     <button onClick={this.submitEmployee}>SUBMIT</button>
                     <button onClick={this.close}> CLOSE </button>
