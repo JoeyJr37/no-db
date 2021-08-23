@@ -58,7 +58,7 @@ class UpdateForm extends Component{
 
         return (
             <form className='updates-form'>
-                <label>Text: <input name='messageText' onChange={this.updateState} value={messageText}/></label>
+                <label>Text: <input className='text-input' name='messageText' onChange={this.updateState} value={messageText}/></label>
                 <label>Updated by: <input name='updatedBy' onChange={this.updateState} value={updatedBy}/></label>
                 <label>Updated on: <input name='updatedOn' onChange={this.updateState} value={updatedOn} type='date'/></label>
                 <label> Concern Level:
