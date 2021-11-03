@@ -75,3 +75,9 @@
     background-color: black;
     color: white;
 }
+
+@media only screen and (max-width: 1400px) {
+    .individual-update {
+        width: 200px;
+    }
+}
