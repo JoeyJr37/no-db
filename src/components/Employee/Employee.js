@@ -36,9 +36,10 @@ class Employee extends Component{
     }
 
     deleteEmployee = (id) => {
-        // console.log(id);
-        this.props.updateDisplay('allStaff');
-        this.props.employeeFunctions.delete(id);
+        if (window.confirm('This action cannot be undone. Are you sure?')){
+            this.props.updateDisplay('allStaff');
+            this.props.employeeFunctions.delete(id);
+        }
     }
 
     addUpdate = (id, body) => {
@@ -149,7 +150,7 @@ class Employee extends Component{
                             <span className='title'>Birth Date</span><h3> {formattedBirthDate} </h3>
                             <div className='button-section'>
                                 <button className='edit-btn' onClick={this.toggleEmployeeUpdateForm}> EDIT ME </button>
-                                {/* <button className='delete-btn' onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button> */}
+                                <button className='delete-btn' onClick={() => this.deleteEmployee(info.id)}> DELETE ME </button>
                             </div>
                         </>}
 

@@ -98,7 +98,7 @@ class Form extends Component{
                 <label>Country: <input name='country' onChange={this.updateState} value={country}/></label>
                 <label>Phone Number: <input name='phone_number' onChange={this.updateState} value={phone_number}/></label>
                 <label>Email Address: <input name='email_address' onChange={this.updateState} value={email_address}/></label>
-                <label>Mentor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
+                <label>Field Staff Pastor: <input name='mentor' onChange={this.updateState} value={mentor}/></label>
                 <label>Birth Date: <input name='birth_date' onChange={this.updateState} value={birth_date}
                                     type='date' /></label>
                 {/* {this.props.info === undefined &&
